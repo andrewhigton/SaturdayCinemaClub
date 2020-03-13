@@ -39,26 +39,8 @@ const Carousel = ({ films:
   if (film === null) return null;
     return (
         <div>
-        <ImageSlide 
-        className={'image-slide'} 
-        // className={active ? 'fade image-slide' : 'image-slide'} 
-        url={ film[currentImageIndex].image } 
-        title={ film[currentImageIndex].title }
-        cinema={ film[currentImageIndex].cinema }
-        date={ film[currentImageIndex].date }
-        />     
-        <div className="arrows">
-        <Arrow
-          direction="left"
-          // clickFunction={ previousSlide } 
-          glyph="&#9664;" 
-         />
-        <Arrow
-          direction="right"
-          // clickFunction={ nextSlide }
-          glyph="&#9654;" 
-         />
-        </div>   
+        <p>works</p>
+        
       </div>
     );
 }
@@ -72,3 +54,24 @@ const mapStateToProps = state => ({
 });
 
 export default connect(mapStateToProps)(Carousel);
+
+// <ImageSlide 
+        // className={'image-slide'} 
+        // // className={active ? 'fade image-slide' : 'image-slide'} 
+        // url={ film[currentImageIndex].image } 
+        // title={ film[currentImageIndex].title }
+        // cinema={ film[currentImageIndex].cinema }
+        // date={ film[currentImageIndex].date }
+        // />     
+        // <div className="arrows">
+        // <Arrow
+        //   direction="left"
+        //   // clickFunction={ previousSlide } 
+        //   glyph="&#9664;" 
+        //  />
+        // <Arrow
+        //   direction="right"
+        //   // clickFunction={ nextSlide }
+        //   glyph="&#9654;" 
+        //  />
+        //</div>   

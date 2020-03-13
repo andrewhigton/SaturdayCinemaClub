@@ -13,6 +13,15 @@
 // 5 why is bookpage called twice?
 // 6 why can i not navigate between the pages without losing the data?
 
+// morning
+// check video for ways out 
+// try to get the _id working
+// at what point are you putting the films in to their own db? 
+
+//ok, trying to get the id again, sure i can do it.
+//you know, just check back in to master.
+//can't load films now, something gone wrong with the db
+
 import React, { useEffect, useState, Fragment } from 'react';
 import { Link, withRouter, Redirect } from 'react-router-dom';
 import PropTypes from 'prop-types';
@@ -22,13 +31,14 @@ import StripeCheckoutButton from '../../components/stripe-button/stripe-button';
 
 const CheckoutPage = ({
 	updateFilm,
+	//what's the diff these two profiles? 
 	getCurrentProfile,
 	profile: { profile, loading },
 	history, 
 	id,
 }) => {
 	const [formData, setFormData] = useState({
-		_id: '',
+		// _id: '',
 		user: '',
 		title: '',
 		date: '',
@@ -46,7 +56,7 @@ const CheckoutPage = ({
 		getCurrentProfile();
 		//this fills the values with current values
 	setFormData({
-      _id: !profile._id ? '' : profile._id,
+      // _id: !profile._id ? '' : profile._id,
       user: !profile.user ? '' : profile.user,
       title: !profile.title ? '' : profile.title,
       cinema: !profile.cinema ? '' : profile.cinema,
@@ -61,7 +71,7 @@ const CheckoutPage = ({
 	//console.log(profile)
 	// console.log(formData)
 	let {
-		_id,
+		// _id,
 		user,
 		title,
 		date,

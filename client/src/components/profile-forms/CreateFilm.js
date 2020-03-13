@@ -6,7 +6,7 @@ import { createFilm, getCurrentProfile } from '../../actions/profile';
 
 const CreateFilm = ({
 	createFilm,
-	// getCurrentProfile,
+	getCurrentProfile,
 	profile: { profile, loading },
 	history
 }) => {
@@ -39,10 +39,10 @@ const CreateFilm = ({
 		createFilm(formData, history);
 	};
 	
-	// useEffect(() => {
-	// 	getCurrentProfile();
-	// 	// eslint-disable-next-line react-hooks/exhaustive-deps
-	// }, [getCurrentProfile]);
+	useEffect(() => {
+		getCurrentProfile();
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [getCurrentProfile]);
 	return loading && profile === null ? (
 		<Redirect to='/dashboard' />
 	) : (
@@ -105,14 +105,14 @@ const CreateFilm = ({
 
 CreateFilm.propTypes = {
 	createFilm: PropTypes.func.isRequired,
-	// getCurrentProfile: PropTypes.func.isRequired,
+	getCurrentProfile: PropTypes.func.isRequired,
 	profile: PropTypes.object.isRequired
 };
 const mapStateToProps = state => ({
 	profile: state.profile
 });
 
-export default connect(mapStateToProps, { createFilm })(
+export default connect(mapStateToProps, { createFilm, getCurrentProfile })(
 	withRouter(CreateFilm)
 	);
 

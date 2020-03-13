@@ -11,7 +11,7 @@ import {
 export const loadFilms = () => async dispatch => {
   
   try {
-    const res = await axios.get('/api/profile');
+    const res = await axios.get('/api/film');
 
     dispatch({
       type: GET_FILM,

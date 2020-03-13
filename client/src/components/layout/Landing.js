@@ -16,11 +16,10 @@ const Landing = ({
 	  useEffect(() =>  {
     	loadFilms();	
 	  	}, [loadFilms]);
-
-	//this is why you can't get to landing	  
-	// if (isAuthenticated) {
- //    return <Redirect to='/dashboard' />;
- //  	}
+	  
+	if (isAuthenticated) {
+    return <Redirect to='/dashboard' />;
+  	}
 
 	return (
 		<section className="landing dark-overlay">
@@ -36,7 +35,7 @@ const Landing = ({
 	}
 
 Landing.propTypes = {
-  // loadFilms: PropTypes.func.isRequired,
+  loadFilms: PropTypes.func.isRequired,
   isAuthenticated: PropTypes.bool,
   films: PropTypes.object.isRequired
 };

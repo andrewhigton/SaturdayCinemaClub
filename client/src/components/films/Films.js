@@ -15,8 +15,9 @@ const Films = ({
 	// useEffect(() =>  {
  //    	loadFilms();	
 	//   	}, [loadFilms]);
-	// console.log(film)
+	
 	if (film === null) return null;
+	console.log(film)
 	return (
 	<Fragment>
     	

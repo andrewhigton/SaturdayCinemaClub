@@ -47,7 +47,6 @@ router.post('/create-film', [
 	  	}
 
 	  	const { 	
-	  		// _id,	
 	  		user,
 	  		image,
 	  		title,
@@ -80,25 +79,33 @@ router.post('/create-film', [
 			}
 		);
 
-		router.put('/booking', [
-		auth, 
-	  ],
-	  async (req, res) => {
+		router.put('/booking', [auth, 
+			//[
+			// check('title', 'Title is required')
+			// .not()
+			// .isEmpty(),
+			// check('date', ' is required')
+			// .not()
+			// .isEmpty(),
+			// check('cinema', ' is required')
+			// .not()
+			// .isEmpty(),
+			//]
+			], async (req, res) => {
+	  	console.log(req.body)
 	  	const errors = validationResult(req)
 	  	if(!errors.isEmpty()) {
 	  		return res.status(400).json({ errors: errors.array() });
 	  	}
-	  	console.log(req.data)
 	  	const { 	
-	  		_id,	
-	  		user,
-	  		image,
+	  		_id,
 	  		title,
+	  		image,
 	  		cinema,
 	  		date,
 	  		ticketPrice,
 			crowdfundTarget,
-			totalsoFar,
+			totalsoFar
 	  	} = req.body;
 
 	  	// so trying to work out how to get the _id of the user, and film
@@ -106,7 +113,7 @@ router.post('/create-film', [
 
 	  	//build profile object 
 	  	const profileFields = {};
-	  	// profileFields.film = req.user._id;
+	  	profileFields.film = req.user._id;
 	  	profileFields.user = req.user.id;
 	  	if(title) profileFields.title = title;
 	  	if(cinema) profileFields.cinema = cinema;
@@ -115,19 +122,17 @@ router.post('/create-film', [
 	  	if(ticketPrice) profileFields.ticketPrice = ticketPrice;
 		if(crowdfundTarget) profileFields.crowdfundTarget= crowdfundTarget;
 		if(totalsoFar) profileFields.totalsoFar= totalsoFar;
-
-	  		console.log(profileFields)
+	  		
 	  		try {
-	  			// let profile = await Profile.findOne({ user: req._id });
-	  			let profile = await Profile.findOne({ film: req.user._id });
-	  			if(profile) {
+	  			const profile = await Profile.findOne({ user: req.user._id });
+					
 	  				profile = await Profile.findOneAndUpdate(
 	  					{ user: req.user.id },
 	  					{ $set: profileFields },
 	  					{ new: true }
 	  					)
 	  				return res.json(profile)
-		  			}
+		  		
 
 		  		} catch (err) {
 		  			console.error(err.message);

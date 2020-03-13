@@ -1,6 +1,3 @@
-//fix the refresh problem. what is going on? 
-//do you need a ticket thing, whereby any films they are attending appeared under a different header
-//ie
 import React, { Fragment, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import Film from '../films/Film';
@@ -9,18 +6,18 @@ import Spinner from '../layout/spinner';
 import { connect } from 'react-redux';
 import DashboardActions from './DashboardActions';
 import { getCurrentProfile } from '../../actions/profile';
-import { loadFilms } from '../../actions/film';
+// import { loadFilms } from '../../actions/film';
 
 const Dashboard = ({ 
   getCurrentProfile, 
   auth: { user }, 
-  // profile: { profile, loading },
+  profile: { profile, loading },
   films: {film}
   }) => {//starts here
   useEffect(() => {
 		getCurrentProfile();
 	}, [getCurrentProfile]);
-
+  console.log(user);
   // if (film === null) return null;
   let arrLength = 5;
   let total = 0;
@@ -34,12 +31,11 @@ const Dashboard = ({
         </h2>
 
         </div>  
-              <div>
-              </div>
-              {user !== null ? 
+            {user !== null ? 
                <Fragment>
+               film
                <div>{film.map(item => (
-                  item.user._id !== user._id ? total++ :
+                  item.user.id !== user.id ? total++ :
                   total++ === arrLength ? 
                   <div className="no-profile">
                     <p>You have not yet created a film</p>
@@ -48,7 +44,7 @@ const Dashboard = ({
                     </Link>
                   </div> : 
                     <Film
-                      key={item._id}
+                      key={item.id}
                       film={item}
                     />
               ))}
@@ -67,31 +63,32 @@ const Dashboard = ({
                     </Link>
                   </div>
               </Fragment> 
-              }
-
+              }  
         </Fragment>
       )
 }
 
  Dashboard.propTypes = {
-	 getCurrentProfile: PropTypes.func.isRequired,
+	  getCurrentProfile: PropTypes.func.isRequired,
 	 //deleteAccount: PropTypes.func.isRequired,
-
-	 auth: PropTypes.object.isRequired,
-  loadFilms: PropTypes.func.isRequired,
-  films: PropTypes.object.isRequired,
-  profile: PropTypes.object.isRequired
+	  auth: PropTypes.object.isRequired,
+    // loadFilms: PropTypes.func.isRequired,
+    films: PropTypes.object.isRequired,
+    profile: PropTypes.object.isRequired
 };  
 
 const mapStateToProps = state => ({
-	auth: state.auth,
+ auth: state.auth,
  films: state.film,
  profile: state.profile
 });
 
-export default connect(mapStateToProps, { getCurrentProfile, loadFilms })(Dashboard);          
+export default connect(mapStateToProps, { getCurrentProfile })(Dashboard);          
 
 // {
+
+
+
 //   "title": "Bladerunner",
 //   "date": "11/05/2020",
 //   "cinema" : "London Curzon Victoria",

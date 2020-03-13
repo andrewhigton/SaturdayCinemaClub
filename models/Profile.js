@@ -5,7 +5,7 @@ const ProfileSchema = new mongoose.Schema({
 		type: mongoose.Schema.Types.ObjectId,
 		ref: 'user'
 	},
-	title: {
+    title: {
 		type: String,
 		required: true
 	},
@@ -36,6 +36,7 @@ const ProfileSchema = new mongoose.Schema({
 });
 
 module.exports = Films = mongoose.model('film', ProfileSchema);
+
 
 // films: [
 //    	{ 
