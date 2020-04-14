@@ -7,7 +7,7 @@ import { createFilm, getCurrentProfile } from '../../actions/profile';
 const CreateFilm = ({
 	createFilm,
 	getCurrentProfile,
-	profile: { profile, loading },
+	// profile: { profile, loading },
 	history
 }) => {
 	const [formData, setFormData] = useState({
@@ -28,7 +28,6 @@ const CreateFilm = ({
 		cinema,
 		date,
 		image,
-	
 	} = formData;
 	
 	const onChange = e =>
@@ -43,9 +42,10 @@ const CreateFilm = ({
 		getCurrentProfile();
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [getCurrentProfile]);
-	return loading && profile === null ? (
-		<Redirect to='/dashboard' />
-	) : (
+	// return loading && profile === null ? (
+	// 	<Redirect to='/dashboard' />
+	// ) : 
+return (
 		<Fragment>
 			<h1 className='dashboard large text-primary'>Create a film request</h1>
 			
@@ -115,8 +115,6 @@ const mapStateToProps = state => ({
 export default connect(mapStateToProps, { createFilm, getCurrentProfile })(
 	withRouter(CreateFilm)
 	);
-
-
 				// {displaySocialInputs && (
 				// 	<Fragment>
 				// 		<div className='form-group social-input'>

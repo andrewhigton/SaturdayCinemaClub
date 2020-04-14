@@ -2,70 +2,77 @@ import React, { Fragment, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import Film from '../films/Film';
 import PropTypes from 'prop-types';
-import Spinner from '../layout/spinner';
+import Spinner from '../layout/Spinner';
 import { connect } from 'react-redux';
 import DashboardActions from './DashboardActions';
 import { getCurrentProfile } from '../../actions/profile';
-// import { loadFilms } from '../../actions/film';
+import Ticket from '../ticket/Ticket';
+import { createProfile } from '../../actions/profile';
 
 const Dashboard = ({ 
   getCurrentProfile, 
   auth: { user }, 
-  profile: { profile, loading },
-  films: {film}
-  }) => {//starts here
+  profiles: { profile, loading },
+  film: {films},
+  history
+  }) => {
   useEffect(() => {
-		getCurrentProfile();
-	}, [getCurrentProfile]);
-  console.log(user);
-  // if (film === null) return null;
-  let arrLength = 5;
-  let total = 0;
- 
-  return (
+    getCurrentProfile();
+  }, [getCurrentProfile]);
+
+  //const { name, email } = user
+  // if(!profile) {
+  //   createProfile(user)
+  // };
+  
+
+    //console.log(user)
+
+     
+
+    return (
+       
         <Fragment>
         <div className="dashboard">
         <h1 className='large text-primary'>Welcome {user && user.name}</h1>
         <h2 className='lead'>
-          <i className='fas fa-user' />Your movies 
+          <i className='fas fa-user' />Your movies and tickets 
         </h2>
 
         </div>  
-            {user !== null ? 
-               <Fragment>
-               film
-               <div>{film.map(item => (
-                  item.user.id !== user.id ? total++ :
-                  total++ === arrLength ? 
-                  <div className="no-profile">
-                    <p>You have not yet created a film</p>
-                    <Link to='/create-film' className='btn btn-primary my-1'>
-                      Create movie
-                    </Link>
-                  </div> : 
-                    <Film
-                      key={item.id}
-                      film={item}
-                    />
-              ))}
-                <div>
-                  <Link to='/create-film' className='btn btn-primary my-1'>
-                        Create movie
-                  </Link>
-                </div> 
-              </div>    
-              </Fragment> : 
-              <Fragment>
-               <div className="no-profile">
-                    <p>You have not yet created a film</p>
-                    <Link to='/create-film' className='btn btn-primary my-1'>
-                      Create movie
-                    </Link>
-                  </div>
-              </Fragment> 
-              }  
-        </Fragment>
-      )
+        {profile && profile.tickets !== null ?              
+            <Fragment>
+            <h1 className="displayHeader">Your films</h1>
+            <div className="displayDash">{films.map(item => (
+                 item.user === user._id ?
+                 <div key={item._id}>
+                 <Film
+                   film={item}
+                 />
+                 </div> : null
+            ))}
+            </div> 
+            <h1 className="displayHeader">Your tickets</h1>
+            <div className="displayDash">{profile.tickets.map(item => (
+                 
+                 <div 
+                 className="singleTicket"
+                 key={item._id}>
+                 <Ticket
+                   ticket={item}
+                 />
+                 </div> 
+                 // <div>
+                 //  <p>No tickets
+                 //  </p>
+                 //  </div>
+            ))}
+            </div> 
+            </Fragment>
+            : null
+          }  
+          </Fragment>
+     )
 }
 
  Dashboard.propTypes = {
@@ -73,22 +80,63 @@ const Dashboard = ({
 	 //deleteAccount: PropTypes.func.isRequired,
 	  auth: PropTypes.object.isRequired,
     // loadFilms: PropTypes.func.isRequired,
-    films: PropTypes.object.isRequired,
-    profile: PropTypes.object.isRequired
+    film: PropTypes.object.isRequired,
+    profiles: PropTypes.object.isRequired
 };  
 
 const mapStateToProps = state => ({
  auth: state.auth,
- films: state.film,
- profile: state.profile
+ film: state.film,
+ profiles: state.profile
 });
 
-export default connect(mapStateToProps, { getCurrentProfile })(Dashboard);          
+export default connect(mapStateToProps, { getCurrentProfile })(Dashboard);                              
+
+ 
+// {user !== null ?              
+
+//                <Fragment>
+//                <div>{films.map(item => (
+//                     item.user === user._id ?
+//                     <div key={item._id}>
+//                     <Film
+//                       film={item}
+//                     />
+//                     </div> : null
+//               ))}
+//                 <div>
+//                   <Link to='/create-film' className='btn btn-primary my-1'>
+//                         Create movie
+//                   </Link>
+//                 </div> 
+//               </div> 
+              
+//                <div className="no-profile">
+//                     <p>You have not yet created a film</p>
+//                     <Link to='/create-film' className='btn btn-primary my-1'>
+//                       Create movie
+//                     </Link>
+//                 </div>
+//               </Fragment>
+              
+//               profile !== null ? 
+//                <Fragment>
+//                <div>{tickets.map(item => (
+//                     <div key={}>
+//                     <p>tickets</p>
+//                     </div>
+//                     ))} :
+//                 <div>
+//                   <Link to='/' className='btn btn-primary my-1'>
+//                         You have not bought any tickets. Click to search films</p>  
+//                   </Link>
+//                 </div> 
+//               </div>    
+//               </Fragment>
+//                 }
+//               }  
 
 // {
-
-
-
 //   "title": "Bladerunner",
 //   "date": "11/05/2020",
 //   "cinema" : "London Curzon Victoria",
@@ -152,3 +200,18 @@ export default connect(mapStateToProps, { getCurrentProfile })(Dashboard);
 // __v
 // :
 // 0
+
+
+// <Fragment>
+//               <div>{tickets.map(item => (
+//                     <div>
+//                     <p>tickets</p>
+//                     </div>
+//                     ))} 
+//                 <div>
+//                   <Link to='/' className='btn btn-primary my-1'>
+//                         <p>You have not bought any tickets. Click to search films</p>  
+//                   </Link>
+//                 </div> 
+//               </div>    
+//           </Fragment>

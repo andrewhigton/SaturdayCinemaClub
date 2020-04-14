@@ -3,17 +3,19 @@ import { setAlert } from './alert';
 
 import {
   GET_PROFILE,
-  // GET_PROFILES,
+  UPDATE_PROFILE,
+  GET_PROFILES,
   PROFILE_ERROR,
-  UPDATE_FILM,
   CLEAR_PROFILE,
-  // ACCOUNT_DELETED,
-  // GET_REPOS
+  FILM_ERROR,
+  GET_FILM,
+  ACCOUNT_DELETED,
 } from './types';
 
 // Get current users profile
 export const getCurrentProfile = () => async dispatch => {
   try {
+    //in dev, this is profile/me
     const res = await axios.get('/api/profile/me');
     // console.log(res.data)
     dispatch({
@@ -28,6 +30,49 @@ export const getCurrentProfile = () => async dispatch => {
   }
 };
 
+export const createProfile = ( name, email, history ) => async dispatch => {
+  try {
+    const config = {
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    };
+    const res = await axios.post('/api/profile', name, email, config);
+    dispatch({
+      type: GET_PROFILE,
+      payload: res.data
+    });
+    dispatch(setAlert('Profile Created', 'success'));
+      history.push('/dashboard');
+  } catch (err) {
+    const errors = err.response.data.errors;
+    if (errors) {
+      errors.forEach(error => dispatch(setAlert(error.msg, 'danger')));
+    }
+    dispatch({
+      type: PROFILE_ERROR,
+      payload: { msg: err.response.statusText, status: err.response.status }
+    });
+  }
+};
+
+export const loadProfiles = () => async dispatch => {
+  
+  try {
+    const res = await axios.get('/api/profile');
+
+    dispatch({
+      type: GET_PROFILES,
+      payload: res.data
+    });
+  } catch (err) {
+    dispatch({
+      type: PROFILE_ERROR,
+      //payload: { msg: err.response.statusText, status: err.response.status }
+    });
+  }
+  };
+
 // create film
 export const createFilm = ( formData, history ) => async dispatch => {
   try {
@@ -39,7 +84,7 @@ export const createFilm = ( formData, history ) => async dispatch => {
     //note - when it comes to finalisng this, get ride of profile, put it in film path
     const res = await axios.post('/api/profile/create-film', formData, config);    
     dispatch({
-      type: GET_PROFILE,
+      type: GET_FILM,
       payload: res.data
     });
 
@@ -62,26 +107,8 @@ export const createFilm = ( formData, history ) => async dispatch => {
   }
 };
 
-//Get profile by ID
-export const getFilmById = userId => async dispatch => {
-  try {
-    const res = await axios.get(`/api/profile/user/${userId}`);
-
-    dispatch({
-      type: GET_PROFILE,
-      payload: res.data
-    });
-  } catch (err) {
-    dispatch({
-      type: PROFILE_ERROR,
-      payload: { msg: err.response.statusText, status: err.response.status }
-    });
-  }
-};
-
-
-// update film
-export const updateFilm = (formData, history) => async dispatch => {
+// Add Tickets
+export const updateUserTickets = (formData, history) => async dispatch => {
   try {
     const config = {
       headers: {
@@ -89,14 +116,14 @@ export const updateFilm = (formData, history) => async dispatch => {
       }
     };
 
-    const res = await axios.put('/api/profile/booking', formData, config);
+    const res = await axios.put('/api/profile/ticket', formData, config);
 
     dispatch({
-      type: UPDATE_FILM,
+      type: UPDATE_PROFILE,
       payload: res.data
     });
 
-    dispatch(setAlert('Thanks for your booking', 'success'));
+    dispatch(setAlert('Tickets Added', 'success'));
 
     history.push('/dashboard');
   } catch (err) {
@@ -105,7 +132,25 @@ export const updateFilm = (formData, history) => async dispatch => {
     if (errors) {
       errors.forEach(error => dispatch(setAlert(error.msg, 'danger')));
     }
+    dispatch({
+      type: PROFILE_ERROR,
+      payload: { msg: err.response.statusText, status: err.response.status }
+    });
+  }
+};
 
+// Delete experience
+export const deleteTickets = id => async dispatch => {
+  try {
+    const res = await axios.delete(`/api/profile/tickets/${id}`);
+
+    dispatch({
+      type: UPDATE_PROFILE,
+      payload: res.data
+    });
+
+    dispatch(setAlert('Tickets Removed', 'success'));
+  } catch (err) {
     dispatch({
       type: PROFILE_ERROR,
       payload: { msg: err.response.statusText, status: err.response.status }
@@ -114,42 +159,22 @@ export const updateFilm = (formData, history) => async dispatch => {
 };
 
 
-// // Get all profiles
-// export const getProfiles = () => async dispatch => {
-//   dispatch({ type: CLEAR_PROFILE });
 
-//   try {
-//     const res = await axios.get('/api/profile');
+// Delete account & profile
+export const deleteAccount = () => async dispatch => {
+  if (window.confirm('Please Note: Your films will still go ahead and tickets cannot be cancelled unless the film fails to reach it\'s target!')) {
+    try {
+      await axios.delete('/api/profile');
 
-//     dispatch({
-//       type: GET_PROFILES,
-//       payload: res.data
-//     });
-//   } catch (err) {
-//     dispatch({
-//       type: PROFILE_ERROR,
-//       payload: { msg: err.response.statusText, status: err.response.status }
-//     });
-//   }
-// };
+      dispatch({ type: CLEAR_PROFILE });
+      dispatch({ type: ACCOUNT_DELETED });
 
-
-
-// // Delete account & profile
-// export const deleteAccount = () => async dispatch => {
-//   if (window.confirm('Are you sure? This can NOT be undone!')) {
-//     try {
-//       await axios.delete('/api/profile');
-
-//       dispatch({ type: CLEAR_PROFILE });
-//       dispatch({ type: ACCOUNT_DELETED });
-
-//       dispatch(setAlert('Your account has been permanantly deleted'));
-//     } catch (err) {
-//       dispatch({
-//         type: PROFILE_ERROR,
-//         payload: { msg: err.response.statusText, status: err.response.status }
-//       });
-//     }
-//   }
-// };
+      dispatch(setAlert('Your account has been permanantly deleted'));
+    } catch (err) {
+      dispatch({
+        type: PROFILE_ERROR,
+        payload: { msg: err.response.statusText, status: err.response.status }
+      });
+    }
+  }
+};

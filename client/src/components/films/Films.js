@@ -2,29 +2,26 @@ import React, { Fragment, useState, useEffect } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import Spinner from '../layout/spinner';
+import Spinner from '../layout/Spinner';
 import { connect } from 'react-redux';
-import { loadFilms } from '../../actions/film';
+// import { loadFilms } from '../../actions/film';
+//import { loadFilms } from '../../actions/film';
 import Film from './Film';
 
 const Films = ({ 
-	loadFilms,
-	films: {film, loading} 
+	// loadFilms,
+	film: {films, loading} 
 	}) => {
 
-	// useEffect(() =>  {
- //    	loadFilms();	
-	//   	}, [loadFilms]);
-	
-	if (film === null) return null;
-	console.log(film)
+	if (films === null) return null;
+	//console.log(films)
 	return (
 	<Fragment>
     	
         <section className="all-screenings">
         	<h2 className="all-screenings-title">All our screenings</h2>
         	<div className="films-list"> 
-	    	{film.map(item => (
+	    	{films.map(item => (
 				<Film
 				film={item}
 				key={item._id}
@@ -39,12 +36,11 @@ const Films = ({
 }
 
 Films.propTypes = {
-	loadFilms: PropTypes.func.isRequired,
-	films: PropTypes.object.isRequired
+	film: PropTypes.object.isRequired
 };
 
 const mapStateToProps = state => ({
-	films: state.film
+	film: state.film
 });
 
-export default connect(mapStateToProps, { loadFilms })(Films);
+export default connect(mapStateToProps)(Films);

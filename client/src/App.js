@@ -20,6 +20,8 @@ import CreateFilm from './components/profile-forms/CreateFilm';
 import Alert from './components/layout/Alert';
 import Profile from './components/profile/Profile';
 import CheckoutPage from './components/booking-page/BookingPage';
+import FilmPage from './components/booking-page/BookingPage';
+import CheckoutFilm from './components/checkout-film/Checkout-Film';
 //Redux
 import { Provider } from 'react-redux';
 import store from './store';
@@ -46,13 +48,15 @@ const App = () => {
 	      	<section className="dark-overlay">
 	      		<Alert />
 	      		<Switch>
+	      		
 	      		  <Route exact path='/register' component={Register} />
 	      		  <Route exact path='/login' component={Login} />
 	      		  <Route exact path='/profile/:id' component={Profile} />          
 	      		  <Route exact path='/howitworks' component={HowItWorks} />          
-	      		  <PrivateRoute exact path='/dashboard' component={Dashboard} />
+	      		  <Route exact path='/:id' component={FilmPage} /> 
+	      		  <Route exact path='/booking/:id' component={CheckoutFilm} /> 
+	      		  <PrivateRoute exact path='/film/dashboard' component={Dashboard} />
 	      		  <PrivateRoute exact path='/create-film' component={CreateFilm} />
-	      		  <PrivateRoute exact path='/booking' component={CheckoutPage} /> 
 	      		  />
 	      		</Switch>
 	      	</section>
@@ -63,7 +67,7 @@ const App = () => {
 }
 
 export default App;
-// <PrivateRoute exact path='/booking/:id' component={CheckoutPage} /> } 
-
+// <PrivateRoute exact path='/booking/:id' component={CheckoutPage} /> 
+	      		  
 // <Route exact path='/dashboard' component={Dashboard} />
 // render={(props) => <CheckoutPage {...props} 

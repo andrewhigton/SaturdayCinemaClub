@@ -2,19 +2,10 @@ import React, { Fragment, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import Spinner from '../layout/spinner';
+import Spinner from '../layout/Spinner';
 import Films from '../films/Films';
 import Film from '../films/Films';
-//import ProfileTop from './ProfileTop';
-//import ProfileAbout from './ProfileAbout';
-// import ProfileExperience from './ProfileExperience';
-// import ProfileEducation from './ProfileEducation';
-//import ProfileGithub from './ProfileGithub';
-//import { getProfileById } from '../../actions/profile';
-
-//so either: pass in films here, run a map fn to find a match with user id
-//or, add each film to a general list, and to the user, and just map each of users films
-//think the latter is better.  
+import { getProfileById } from '../../actions/profile';
 
 const Profile = ({
   getProfileById,
@@ -22,9 +13,9 @@ const Profile = ({
   auth,
   match
 }) => {
-  useEffect(() => {
-    getProfileById(match.params.id);
-  }, [getProfileById, match.params.id]);
+  // useEffect(() => {
+  //   getProfileById(match.params.id);
+  // }, [getProfileById, match.params.id]);
 
   return (
     <Fragment>
@@ -63,6 +54,7 @@ const mapStateToProps = state => ({
   auth: state.auth
 });
 
-export default connect(
-  mapStateToProps
-)(Profile);
+export default connect(mapStateToProps)(Profile);                              
+// export default connect(
+//   mapStateToProps
+// )(Profile);

@@ -3,21 +3,21 @@ import { connect } from 'react-redux';
 import { Link, Redirect } from 'react-router-dom';
 import { setAlert } from '../../actions/alert';
 import { register } from '../../actions/auth';
+import { createProfile } from '../../actions/profile';
 import PropTypes from 'prop-types';
 
-const Register = ({ setAlert, register, isAuthenticated }) => {
+const Register = ({ setAlert, register, isAuthenticated, history }) => {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
     password: '',
-    password2: ''
+    password2: '',
+    tickets: []
   });
 
-  const { name, email, password, password2 } = formData;
+  const { name, email, password, password2, tickets } = formData;
 
   const onChange = e =>
-    //e.target.name in brakets makes it reusable. How, exactly?
-    //its in 34, i think
     setFormData({ ...formData, [e.target.name]: e.target.value });
 
   const onSubmit = async e => {
@@ -25,9 +25,18 @@ const Register = ({ setAlert, register, isAuthenticated }) => {
     if (password !== password2) {
       setAlert('Passwords do not match', 'danger');
     } else {
+      
       register({ name, email, password });
+      //createProfile({ formData } );
+      //registerProfile({ formData })
     }
   };
+  //so this isn't being called. need to reg GET_PROF in redux
+  // const registerProfile = (formData) => {
+
+  //   console.log(formData)
+  //     createProfile(formData, history);
+  // }
 
   if (isAuthenticated) {
     return <Redirect to='/dashboard' />;
@@ -88,7 +97,8 @@ const Register = ({ setAlert, register, isAuthenticated }) => {
 Register.propTypes = {
   setAlert: PropTypes.func.isRequired,
   register: PropTypes.func.isRequired,
-  isAuthenticated: PropTypes.bool
+  isAuthenticated: PropTypes.bool,
+  createProfile: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = state => ({
@@ -97,11 +107,5 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-  { setAlert, register }
+  { setAlert, register, createProfile }
 )(Register);
-//export default connect(null, {register} )(Register);
-// export default Register;
-
-// const Register = () => {
-//   return <div>Register</div>
-// };

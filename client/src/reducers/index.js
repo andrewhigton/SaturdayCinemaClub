@@ -8,7 +8,6 @@ import film from './film';
 export default combineReducers({
 	alert,
 	auth,
-	profile,
-	film
-	// post
+	film,
+	profile
 });

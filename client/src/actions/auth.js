@@ -4,7 +4,9 @@ import {
   REGISTER_SUCCESS,
   REGISTER_FAIL,
   USER_LOADED,
+  USER_ERROR,
   AUTH_ERROR,
+  UPDATE_USER,
   LOGIN_SUCCESS,
   LOGIN_FAIL,
   LOGOUT,
@@ -28,7 +30,7 @@ export const loadUser = () => async dispatch => {
     });
   } catch (err) {
     dispatch({
-      type: AUTH_ERROR
+      type: USER_ERROR
     });
   }
 };

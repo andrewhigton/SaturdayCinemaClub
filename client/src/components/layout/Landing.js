@@ -2,7 +2,7 @@ import React, { Fragment, useEffect } from 'react';
 import { Link, Redirect } from 'react-router-dom';
 import { connect, useDispatch } from 'react-redux';
 import PropTypes from 'prop-types';
-import Spinner from '../layout/spinner';
+import Spinner from '../layout/Spinner';
 import Films from '../films/Films';
 import Film from '../films/Films';
 import { loadFilms } from '../../actions/film';
@@ -11,16 +11,16 @@ import Carousel from '../carousel/Carousel';
 const Landing = ({ 
 	isAuthenticated, 
 	loadFilms,
-	films: {film} 
+	// film: {films} 
 	}) => {
 	  useEffect(() =>  {
     	loadFilms();	
 	  	}, [loadFilms]);
-	  
-	if (isAuthenticated) {
-    return <Redirect to='/dashboard' />;
-  	}
-
+	 
+	// if (isAuthenticated) {
+ //    return <Redirect to='/film/dashboard'/>;
+ //  	}
+  	
 	return (
 		<section className="landing dark-overlay">
 	      <div className="carousel">
@@ -37,13 +37,12 @@ const Landing = ({
 Landing.propTypes = {
   loadFilms: PropTypes.func.isRequired,
   isAuthenticated: PropTypes.bool,
-  films: PropTypes.object.isRequired
+  // film: PropTypes.object.isRequired
 };
 
 const mapStateToProps = state => ({
   isAuthenticated: state.auth.isAuthenticated,
-  films: state.film
+  // film: state.film
 });
 
 export default connect(mapStateToProps, { loadFilms })(Landing);
-//export default Landing;

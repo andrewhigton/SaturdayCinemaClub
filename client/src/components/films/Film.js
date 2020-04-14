@@ -1,4 +1,4 @@
-import React, { Fragment, useState, useEffect } from 'react';
+import React from 'react';
 import CustomButton from '../custom-button/CustomButton'; 
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
@@ -8,10 +8,16 @@ const moment = require('moment');
 //import ImageSlide from '../carousel/ImageSlide';
 
 const Film = ({ film }) => {
-const { title,date,cinema,image,ticketPrice,crowdfundTarget,totalsoFar } = film;
+const { _id, title,date,cinema,image,ticketPrice,crowdfundTarget,totalsoFar } = film;
 const time = moment(date)
 const formattedDate = time.format('MMMM Do YYYY, h:mm a');
-  // console.log({film})
+//console.log(_id);
+const handleClick = (e) => {
+    // const { param } = e.target._id;
+    // console.log(e);
+    //do what you want to do with the parameter
+  }
+  //what's teh link between film abd bookingpage. think this migth need sorting next
   return (
       <div className="film">
         <img src={image} className="" />
@@ -21,14 +27,24 @@ const formattedDate = time.format('MMMM Do YYYY, h:mm a');
         <p>Ticket Price £{ticketPrice}</p>
         <p>Ticket Target {crowdfundTarget}</p>
         <p>Tickets sold {totalsoFar}</p>
-          <div>
-            <CustomButton film={film}/>
-          </div>          
-      </div>  
+          <Link to={`/${_id}`}>    
+
+          
+            <button 
+            className='custom-button'
+
+            />
+            </Link>
+          </div> 
     )
   }  
-  
-   
+
+export default Film;
+  // <Link to={`booking/${_id}`}>    
+            // {{
+            //  pathname: `booking/${title}`,
+            //  state: {title}
+            // }}
 
 // Film.propTypes = {
 //   // loadFilms: PropTypes.func.isRequired,
@@ -45,8 +61,3 @@ const formattedDate = time.format('MMMM Do YYYY, h:mm a');
 
 // export default connect(mapStateToProps)(Film);
       
-export default Film;
-
-// <p className="inset-text-title">{title}</p>
-// <p className="inset-text-details">{cinema}</p>
-// <img url={image} className="homepage-img fade"/>

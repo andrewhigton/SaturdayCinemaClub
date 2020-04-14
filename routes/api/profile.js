@@ -5,16 +5,16 @@ const Profile = require('../../models/Profile');
 const User = require('../../models/User'); 
 const { check, validationResult } = require('express-validator');
 
-// @route GET api/profile/me
+// @route GET api/profile for films and tickets
 // @desc get current users profile
 // @access Private
 router.get('/me', auth, async (req, res) => {
 	try {
 		const profile = await Profile.findOne({ user: req.user.id }).populate(
 		'user',
-		['name', 'avatar']
+		['name']
 		); 
-		
+		// console.log(req)		
 		if(!profile) {
 			return res.status(400).json({ msg: 'No profile for this user' });
 		}
@@ -23,13 +23,100 @@ router.get('/me', auth, async (req, res) => {
 		console.error(err.message);
 		res.status(500).send('Server error')
 	}
-	// res.send('Profile route');
 });
+
+router.post('/', 
+	// [
+	// 	auth, 
+	//   ],
+	  async (req, res) => {
+	  	const errors = validationResult(req)
+	  	if(!errors.isEmpty()) {
+	  		return res.status(400).json({ errors: errors.array() });
+	  	}
+
+	  	const {
+	  		user,
+    		name,
+    		tickets,
+	  	} = req.body;
+
+	  	//build profile object 
+	  	const profileFields = {}
+	  		profileFields.user = req.user.id;
+	  		if(user) profileFields.user = user;
+	  		if(name) profileFields.name = name;
+    		if(tickets) profileFields.tickets = tickets;
+	  		
+
+	  		try {
+	  			let profile = await Profile.findOne({ user: req.user.id });
+	  			if(profile) {
+	  			profile = await Profile.findOneAndUpdate(
+  					{ user: req.user.id },
+  					{ $set: profileFields },
+  					{ new: true }
+  					)
+  				return res.json(profile)
+	  			}
+
+	  			//create
+	  			profile = new Profile(profileFields);
+		  		await profile.save()
+	  			res.json(profile);
+
+		  		} catch (err) {
+		  			console.error(err.message);
+		  			res.status(500).send('Server error');
+		  		}
+			}
+		);
 
 // @route POST api/profile
 // @desc create or update user profile
 // @access Private
-//the question at first, is this - how are you sending films to a film database?
+router.put('/ticket', [
+		auth, 
+	  ],
+	  async (req, res) => {
+	  	const errors = validationResult(req)
+	  	if(!errors.isEmpty()) {
+	  		return res.status(400).json({ errors: errors.array() });
+	  	}
+
+	  	const {
+	  		title,
+    		ticketPrice,
+    		numberOfTickets,
+    		date,
+    		cost,
+    		cinema,
+    		crowdfundTarget,
+    		totalsoFar
+	  	} = req.body;
+
+	  	const newTicket = {
+	  		title,
+    		ticketPrice,
+    		numberOfTickets,
+    		date,
+    		cost,
+    		cinema,
+    		crowdfundTarget,
+    		totalsoFar
+	  	}
+	  		try {
+	  			let profile = await Profile.findOne({ user: req.user.id });
+	  			profile.tickets.unshift(newTicket);
+ 				await profile.save();
+ 				res.json(profile);
+		  		} catch (err) {
+		  			console.error(err.message);
+		  			res.status(500).send('Not updated');
+		  		}
+			}
+		);
+
 router.post('/create-film', [
 		auth, 
 		[
@@ -68,116 +155,23 @@ router.post('/create-film', [
 		if(crowdfundTarget) profileFields.crowdfundTarget= crowdfundTarget;
 		if(totalsoFar) profileFields.totalsoFar= totalsoFar;
 
-	  		try {
-  	  			let profile = new Profile(profileFields);
-	  			await profile.save()
-	  			res.json(profile);
-		  		} catch (err) {
+			  try {
+				//create
+		  			profile = new Film(profileFields);
+		  			await profile.save()
+		  			res.json(profile);
+				  } catch (err) {
 		  			console.error(err.message);
 		  			res.status(500).send('Server error');
 		  		}
 			}
 		);
-
-		router.put('/booking', [auth, 
-			//[
-			// check('title', 'Title is required')
-			// .not()
-			// .isEmpty(),
-			// check('date', ' is required')
-			// .not()
-			// .isEmpty(),
-			// check('cinema', ' is required')
-			// .not()
-			// .isEmpty(),
-			//]
-			], async (req, res) => {
-	  	console.log(req.body)
-	  	const errors = validationResult(req)
-	  	if(!errors.isEmpty()) {
-	  		return res.status(400).json({ errors: errors.array() });
-	  	}
-	  	const { 	
-	  		_id,
-	  		title,
-	  		image,
-	  		cinema,
-	  		date,
-	  		ticketPrice,
-			crowdfundTarget,
-			totalsoFar
-	  	} = req.body;
-
-	  	// so trying to work out how to get the _id of the user, and film
-	  	// check structure in the morning
-
-	  	//build profile object 
-	  	const profileFields = {};
-	  	profileFields.film = req.user._id;
-	  	profileFields.user = req.user.id;
-	  	if(title) profileFields.title = title;
-	  	if(cinema) profileFields.cinema = cinema;
-	  	if(image) profileFields.image = image;
-	  	if(date) profileFields.date= date;
-	  	if(ticketPrice) profileFields.ticketPrice = ticketPrice;
-		if(crowdfundTarget) profileFields.crowdfundTarget= crowdfundTarget;
-		if(totalsoFar) profileFields.totalsoFar= totalsoFar;
-	  		
-	  		try {
-	  			const profile = await Profile.findOne({ user: req.user._id });
-					
-	  				profile = await Profile.findOneAndUpdate(
-	  					{ user: req.user.id },
-	  					{ $set: profileFields },
-	  					{ new: true }
-	  					)
-	  				return res.json(profile)
-		  		
-
-		  		} catch (err) {
-		  			console.error(err.message);
-		  			res.status(500).send('Server error');
-		  		}
-			}
-		);
-
-		// @route GET api/profile
-		// @desc GET all profiles
-		// @access Public
-
-		router.get('/', async (req, res) => {
-			try {
-				const profiles = await Profile.find().populate('user', 
-				['name']);
-				res.json(profiles)
-			} catch (err) {
-				console.error(err.message);
-				res.status(500).send('Server Error');
-			}
-		});
-
-		// @route GET api/profile/user/:user_id
-		// @desc GET profile by user id
-		// @access Public
-	router.get('/user/:user_id', async (req, res) => {
-		try {
-			const profile = await Profile.findOne({ user: req.params.user_id }).populate('user', 
-			['name', 'avatar']);
-			if(!profile) return res.status(400).json({ msg: 'no profile for this user'})
-			res.json(profile)
-		} catch (err) {
-			console.error(err.message);
-			if(err.kind === 'ObjectId') {
-				return res.status(400).json({ msg: 'Profile not found'})
-			}
-			res.status(500).send('Server Error');
-		}
-	});
+		
 		// @route DELETE api/profile
 		// @desc delete profile, user and post
 		// @access Private
 
-		router.delete('/', auth, async (req, res) => {
+router.delete('/{id}', auth, async (req, res) => {
 			try {
 				await Post.deleteMany({ user: req.user.id })
 				//remove profile
@@ -190,6 +184,22 @@ router.post('/create-film', [
 				res.status(500).send('Server Error');
 			}
 		});
+
+router.delete('/tickets/:exp_id', auth, async (req, res) => {
+			try {
+				const profile = await Profile.findOne({ user: req.user.id });
+				const removeIndex = profile.tickets
+					.map(item => item.id)
+					.indexOf(req.params.exp_id);
+					profile.tickets.splice(removeIndex, 1);
+					await profile.save();
+					res.json(profile);
+			} catch (err) {
+				console.error(err.message);
+		 		res.status(500).send('Nope');
+			}
+		})
+
 
 
 module.exports = router;

@@ -1,37 +1,154 @@
-import React from 'react';
+import React, { useEffect, useState, Fragment } from 'react';
 import { connect } from 'react-redux';
-import { clearItemFromCart, addItem, removeItem } from '../../reducers/cart/cart.actions';
-import './checkout-item.styles.scss';
+import { useParams} from 'react-router';
+import { useSelector, useDispatch } from 'react-redux';
+import { Link, withRouter, Redirect } from 'react-router-dom';
+import StripeCheckoutButton from '../../components/stripe-button/stripe-button';
+import PropTypes from 'prop-types';
+import { getFilmById, updateFilm } from '../../actions/film';
+import { updateUserTickets } from '../../actions/profile';
+//import { UPDATE_FILM } from '../../actions/types';
+//import './checkout-item.styles.scss';
 
-const CheckoutFilm = ({ cartItem, clearItem, addItem, removeItem }) => {
-  const { name, imageUrl, price, quantity } = cartItem;
+const CheckoutFilm = ({ 
+  film: {film, loading}, 
+  match, 
+  getFilmById, 
+  updateFilm, 
+  updateUserTickets,
+  history }) => {
+
+  // let bookingTotal = 0;
+
+  const [filmData, setFilmData] = useState({
+    _id: film._id,
+    user: film.user,
+    title: film.title,
+    date: film.date,
+    cinema: film.cinema,
+    image: film.image,
+    ticketPrice: film.ticketPrice,
+    crowdfundTarget: film.crowdfundTarget,
+    totalsoFar: film.totalsoFar
+  });
+
+  let [bookingCost, setBookingCost] = useState(0);
+
+  const [ticketData, setTicketData] = useState({
+    title: film.title,
+    ticketPrice: film.ticketPrice,
+    date: film.date,
+    cinema: film.cinema,
+    crowdfundTarget: film.crowdfundTarget,
+    totalsoFar: film.totalsoFar,
+    numberOfTickets: 0,
+    cost: 0
+  });
+    
+  const onChange = (e) => {   
+    let ticketsTotal = parseInt(e.target.value);
+    let bookingTotal = parseInt(film.ticketPrice) * parseInt(e.target.value); 
+    let totalTicketsBooked = film.totalsoFar + parseInt(e.target.value)
+    setBookingCost(bookingTotal)
+    setTotalSoFar(totalTicketsBooked);
+    setTicketTotalSoFar(totalTicketsBooked, bookingTotal, ticketsTotal);
+  }
+
+  const setTotalSoFar = (totalTicketsBooked) => {
+    setFilmData({...filmData, totalsoFar: totalTicketsBooked });
+  }
+
+  const setTicketTotalSoFar = (totalTicketsBooked, bookingTotal, ticketsTotal) => {
+    setTicketData({...ticketData, 
+     totalsoFar: totalTicketsBooked, 
+     cost: bookingTotal,
+     numberOfTickets: ticketsTotal });
+  } 
+
+  const onSubmit = (e) => {
+    e.preventDefault();
+    updateFilm(filmData, history);
+    updateUserTickets(ticketData, history);
+  };
+
+  if (film === null) return null;
   return (
-    <div className='checkout-item'>
-      <div className='image-container'>
-        <img src={imageUrl} alt='item' />
+    <div className="film">
+    <div>
+      <form>
+      <div className='checkout-page how-it-works'>
+        <div className='checkout-header'>
+          <div className='header-block'>
+
+            <span>Film: {film.title}</span>
+          </div>
+          
+          <div className='header-block'>
+            <span>Date: {film.date} </span>
+          </div>
+          
+          <div className='header-block'>
+            <span>Price: £{film.ticketPrice} </span>
+          </div>
+          
+          <div className='header-block'>
+            <span>Crowdfunding Target: {film.crowdfundTarget} </span>
+          </div>
+          <div 
+          className='header-block'>
+            <span>Tickets sold: {film.totalsoFar}</span>
+          </div>
+        </div>
+        </div>
+        </form>
+      
+
+          <div className='header-block'>
+            <input
+              type='number'
+              placeholder='Enter number of tickets'
+              name='tickets'
+              //onInput={e => setBookingCost({ parseInt({film.ticketPrice}) * parseInt(e.target.value)}) }
+              onChange={e => onChange(e)}
+            />
+          </div>
+          <div className='header-block'>
+            <span>Basket total: £{bookingCost}</span>
+          </div>
+          <div>
+          <Link className='btn btn-light my-1' to='/dashboard'>Go Back
+          </Link>
+          </div>
+          <div>
+            
+            <span onClick={e => onSubmit(e)}> 
+              <button>Press</button>
+            </span>
+          </div>
+        </div>
       </div>
-      <span className='name'>{name}</span>   
-        <span className='quantity'>
-        <div className='arrow' onClick={() => removeItem(cartItem)}>&#10094;</div>
-          <span className='value'>{quantity}</span>
-        <div className='arrow' onClick={() => addItem(cartItem)}>&#10095;</div>
-        </span>
-      <span className='price'>{price}</span>
-      <div className='remove-button' onClick={() => clearItem(cartItem)}>&#10005;</div>
-    </div>
-    )
+  )
 }
 
-const mapDispatchToProps = dispatch => ({
-  clearItem: item => dispatch(clearItemFromCart(item)),
-  addItem: item => dispatch(addItem(item)),
-  removeItem: item => dispatch(removeItem(item))
-  })
+CheckoutFilm.propTypes = {
+  updateFilm: PropTypes.func.isRequired,
+  updateUserTickets: PropTypes.func.isRequired,
+  // getCurrentProfile: PropTypes.func.isRequired,
+  getFilmById: PropTypes.func.isRequired,
+  //  film: PropTypes.object.isRequired,
+  //profile: PropTypes.object.isRequired
+};
 
-export default connect(null, mapDispatchToProps)(CheckoutFilm);
-// the clearItem pattern:
-// onclick triggers clearItem
-// clearItem is dispatched to Props through clearItemFromCart with the item
-// sent to actions, actions finds it in types
-// the reducer filters out the item 
-// goes through to root reducer, with new cart object 
+const mapStateToProps = state => ({
+  //profile: state.profile,
+  film: state.film
+});
+
+export default connect(mapStateToProps, { 
+  getFilmById, 
+  updateFilm, 
+  updateUserTickets 
+})(withRouter(CheckoutFilm));
+
+
+              // <StripeCheckoutButton />
