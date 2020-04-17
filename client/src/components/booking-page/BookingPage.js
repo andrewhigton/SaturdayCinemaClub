@@ -1,16 +1,5 @@
-//toto
-// book through landing page, go to a page that tells user your ticket will be sent when film confirmed
-// how to trigger rerender after booking?
-
-// once they book, take user to their dashboard, with tickets and any films created  
-// can only do this with stripe payouts on server 
-// so keep profile separate. use main landing for films. plus your films and tickets link  
-// next: how to create a profile? 
-
-// 5 how do you create one auto? do you create a profile separately? tom doesn't have one.jim does
 // 6 fix css, make flexy for mobile
 // 7 api call on film page? imdb, wiki?  
-// 8 reload dashboard, films not yet loaded - log user out?
 // 9 need to add stripe checkout details   
 
 import React, { useEffect, useState, Fragment } from 'react';

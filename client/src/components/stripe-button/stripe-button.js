@@ -18,19 +18,21 @@ const StripeCheckoutButton = ({ price }) => {
 
 	return (
 		<div className='how-it-works'>
-			
+	
+
 		<StripeCheckout
 		label='Pay now'
 		name='Crown Clothing'
 		billingAddress
 		shippingAddress
 		image='https://sendeyo.com/up/d/f3eb2117da'
-		description={`Your total is 20`}
+		description={`Your total is £{price}`}
+		amount={priceForStripe}
 		// amount={priceForStripe}
 		panelLabel='Pay now'
 		token={onToken}
 		stripeKey={publishableKey}
-		success_url='localhost:3000/landing' 
+		success_url='localhost:3000/film/dashboard' 
 		/>
 		</div>
 		)

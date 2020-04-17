@@ -52,7 +52,7 @@ export const register = ({ name, email, password }) => async dispatch => {
       payload: res.data
     });
     dispatch(loadUser());
-  
+    // dispatch(createProfile());
   } catch (err) {
     const errors = err.response.data.errors;
 
@@ -97,6 +97,58 @@ export const login = (email, password) => async dispatch => {
     });
   }
 };
+
+// Add Tickets
+export const updateUserTickets = (formData, history) => async dispatch => {
+  try {
+    const config = {
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    };
+
+    const res = await axios.post('/api/users/ticket', formData, config);
+
+    dispatch({
+      type: UPDATE_USER,
+      payload: res.data
+    });
+
+    dispatch(setAlert('Tickets Added', 'success'));
+
+    history.push('/film/dashboard');
+  } catch (err) {
+    const errors = err.response.data.errors;
+
+    if (errors) {
+      errors.forEach(error => dispatch(setAlert(error.msg, 'danger')));
+    }
+    dispatch({
+      type: USER_ERROR,
+      payload: { msg: err.response.statusText, status: err.response.status }
+    });
+  }
+};
+
+export const deleteTickets = id => async dispatch => {
+  try {
+    const res = await axios.delete(`/api/auth/tickets/${id}`);
+
+    dispatch({
+      type: UPDATE_USER,
+      payload: res.data
+    });
+
+    dispatch(setAlert('Tickets Removed', 'success'));
+  } catch (err) {
+    dispatch({
+      type: USER_ERROR,
+      payload: { msg: err.response.statusText, status: err.response.status }
+    });
+  }
+};
+
+
 
 //Logout / Clear Profile
 export const logout = () => dispatch => {

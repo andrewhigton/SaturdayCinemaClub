@@ -10,28 +10,12 @@ import Ticket from '../ticket/Ticket';
 import { createProfile } from '../../actions/profile';
 
 const Dashboard = ({ 
-  getCurrentProfile, 
   auth: { user }, 
-  profiles: { profile, loading },
   film: {films},
   history
   }) => {
-  useEffect(() => {
-    getCurrentProfile();
-  }, [getCurrentProfile]);
-
-  //const { name, email } = user
-  // if(!profile) {
-  //   createProfile(user)
-  // };
-  
-
-    //console.log(user)
-
-     
-
-    return (
-       
+       return (
+       !user && !films ? <Spinner /> :
         <Fragment>
         <div className="dashboard">
         <h1 className='large text-primary'>Welcome {user && user.name}</h1>
@@ -40,7 +24,7 @@ const Dashboard = ({
         </h2>
 
         </div>  
-        {profile && profile.tickets !== null ?              
+        {user.tickets !== null ?              
             <Fragment>
             <h1 className="displayHeader">Your films</h1>
             <div className="displayDash">{films.map(item => (
@@ -53,7 +37,7 @@ const Dashboard = ({
             ))}
             </div> 
             <h1 className="displayHeader">Your tickets</h1>
-            <div className="displayDash">{profile.tickets.map(item => (
+            <div className="displayDash">{user.tickets.map(item => (
                  
                  <div 
                  className="singleTicket"

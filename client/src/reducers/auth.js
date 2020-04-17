@@ -18,8 +18,7 @@ const initialState = {
 };
 
 export default function(state = initialState, action) {
-  const { type, payload } = action;
-  
+  const { type, payload } = action;  
   switch (type) {
     case USER_LOADED:
     return {
@@ -38,13 +37,15 @@ export default function(state = initialState, action) {
       loading: false
     };
     case UPDATE_USER: 
-    return {
-            ...state,
-            user: payload,
-            isAuthenticated: true,
-            loading: false 
-          };
-
+      return {
+        ...state,
+        user: payload,
+        loading: false,
+      //...state,
+      // user: payload, 
+      isAuthenticated: true,
+      // loading: false,      
+      };
     case REGISTER_FAIL:
     case AUTH_ERROR:
     case LOGIN_FAIL:

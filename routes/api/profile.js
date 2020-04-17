@@ -25,52 +25,52 @@ router.get('/me', auth, async (req, res) => {
 	}
 });
 
-router.post('/', 
-	// [
-	// 	auth, 
-	//   ],
-	  async (req, res) => {
-	  	const errors = validationResult(req)
-	  	if(!errors.isEmpty()) {
-	  		return res.status(400).json({ errors: errors.array() });
-	  	}
+// router.post('/', 
+// 	// [
+// 	// 	auth, 
+// 	//   ],
+// 	  async (req, res) => {
+// 	  	const errors = validationResult(req)
+// 	  	if(!errors.isEmpty()) {
+// 	  		return res.status(400).json({ errors: errors.array() });
+// 	  	}
 
-	  	const {
-	  		user,
-    		name,
-    		tickets,
-	  	} = req.body;
+// 	  	const {
+// 	  		user,
+//     		name,
+//     		tickets,
+// 	  	} = req.body;
 
-	  	//build profile object 
-	  	const profileFields = {}
-	  		profileFields.user = req.user.id;
-	  		if(user) profileFields.user = user;
-	  		if(name) profileFields.name = name;
-    		if(tickets) profileFields.tickets = tickets;
+// 	  	//build profile object 
+// 	  	const profileFields = {}
+// 	  		profileFields.user = req.user.id;
+// 	  		if(user) profileFields.user = user;
+// 	  		if(name) profileFields.name = name;
+//     		if(tickets) profileFields.tickets = tickets;
 	  		
 
-	  		try {
-	  			let profile = await Profile.findOne({ user: req.user.id });
-	  			if(profile) {
-	  			profile = await Profile.findOneAndUpdate(
-  					{ user: req.user.id },
-  					{ $set: profileFields },
-  					{ new: true }
-  					)
-  				return res.json(profile)
-	  			}
+// 	  		try {
+// 	  			let profile = await Profile.findOne({ user: req.user.id });
+// 	  			if(profile) {
+// 	  			profile = await Profile.findOneAndUpdate(
+//   					{ user: req.user.id },
+//   					{ $set: profileFields },
+//   					{ new: true }
+//   					)
+//   				return res.json(profile)
+// 	  			}
 
-	  			//create
-	  			profile = new Profile(profileFields);
-		  		await profile.save()
-	  			res.json(profile);
+// 	  			//create
+// 	  			profile = new Profile(profileFields);
+// 		  		await profile.save()
+// 	  			res.json(profile);
 
-		  		} catch (err) {
-		  			console.error(err.message);
-		  			res.status(500).send('Server error');
-		  		}
-			}
-		);
+// 		  		} catch (err) {
+// 		  			console.error(err.message);
+// 		  			res.status(500).send('Server error');
+// 		  		}
+// 			}
+// 		);
 
 // @route POST api/profile
 // @desc create or update user profile

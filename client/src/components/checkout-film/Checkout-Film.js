@@ -6,9 +6,12 @@ import { Link, withRouter, Redirect } from 'react-router-dom';
 import StripeCheckoutButton from '../../components/stripe-button/stripe-button';
 import PropTypes from 'prop-types';
 import { getFilmById, updateFilm } from '../../actions/film';
-import { updateUserTickets } from '../../actions/profile';
+//import { updateUserTickets } from '../../actions/profile';
+import { updateUserTickets } from '../../actions/auth';
 //import { UPDATE_FILM } from '../../actions/types';
 //import './checkout-item.styles.scss';
+
+//when you buy a ticket, it swtiches to jim. why?
 
 const CheckoutFilm = ({ 
   film: {film, loading}, 
@@ -17,7 +20,6 @@ const CheckoutFilm = ({
   updateFilm, 
   updateUserTickets,
   history }) => {
-
   // let bookingTotal = 0;
 
   const [filmData, setFilmData] = useState({
@@ -120,9 +122,13 @@ const CheckoutFilm = ({
           </Link>
           </div>
           <div>
-            
+          <div className='test-warning'>
+          * Please use the following test credit card for payments  
+          <br />
+          4242 4242 4242 4242 - Exp 01/21 - CVV: 123
+          </div>
             <span onClick={e => onSubmit(e)}> 
-              <button>Press</button>
+              <StripeCheckoutButton price={bookingCost} />
             </span>
           </div>
         </div>
@@ -133,14 +139,11 @@ const CheckoutFilm = ({
 CheckoutFilm.propTypes = {
   updateFilm: PropTypes.func.isRequired,
   updateUserTickets: PropTypes.func.isRequired,
-  // getCurrentProfile: PropTypes.func.isRequired,
   getFilmById: PropTypes.func.isRequired,
-  //  film: PropTypes.object.isRequired,
-  //profile: PropTypes.object.isRequired
+  film: PropTypes.object.isRequired,
 };
 
 const mapStateToProps = state => ({
-  //profile: state.profile,
   film: state.film
 });
 
@@ -150,5 +153,5 @@ export default connect(mapStateToProps, {
   updateUserTickets 
 })(withRouter(CheckoutFilm));
 
-
-              // <StripeCheckoutButton />
+//<button>Press</button>
+              

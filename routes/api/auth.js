@@ -75,6 +75,117 @@ router.get('/', auth, async (req, res) => {
 );
 
 
+// @route POST api/auth
+// @desc create or update user profile
+// @access Private
+router.post('/ticket', [
+    auth, 
+    ],
+    async (req, res) => {
+      const errors = validationResult(req)
+      if(!errors.isEmpty()) {
+        return res.status(400).json({ errors: errors.array() });
+      }
+
+      const {
+        title,
+        ticketPrice,
+        numberOfTickets,
+        date,
+        cost,
+        cinema,
+        crowdfundTarget,
+        totalsoFar
+      } = req.body;
+
+      const newTicket = {
+        title,
+        ticketPrice,
+        numberOfTickets,
+        date,
+        cost,
+        cinema,
+        crowdfundTarget,
+        totalsoFar
+      }
+        try {
+          let profile = await User.findOne({ user: req.body.email });
+          profile.tickets.unshift(newTicket);
+        await profile.save();
+        res.json(profile);
+          } catch (err) {
+            console.error(err.message);
+            res.status(500).send('Not updated');
+          }
+      }
+    );
+
+    router.delete('/tickets/:exp_id', auth, async (req, res) => {
+      try {
+        const profile = await User.findOne({ user: req.body.email });
+        const removeIndex = profile.tickets
+          .map(item => item.id)
+          .indexOf(req.params.exp_id);
+          profile.tickets.splice(removeIndex, 1);
+          await profile.save();
+          res.json(profile);
+      } catch (err) {
+        console.error(err.message);
+        res.status(500).send('Nope');
+      }
+    })
+
+
+// router.post('/create-film', [
+//     auth, 
+//     [
+//     check('title', 'title is required').not().isEmpty(),
+//     check('cinema', 'cinema is required').not().isEmpty(),
+//     check('date', 'date is required').not().isEmpty(),
+//     check('image', 'image is required').not().isEmpty()
+
+//     ]
+//     ],
+//     async (req, res) => {
+//       const errors = validationResult(req)
+//       if(!errors.isEmpty()) {
+//         return res.status(400).json({ errors: errors.array() });
+//       }
+
+//       const {   
+//         user,
+//         image,
+//         title,
+//         cinema,
+//         date,
+//         ticketPrice,
+//       crowdfundTarget,
+//       totalsoFar
+//     } = req.body;
+
+//       //build profile object 
+//       const profileFields = {};
+//       profileFields.user = req.user.id;
+//       if(title) profileFields.title = title;
+//       if(cinema) profileFields.cinema = cinema;
+//       if(image) profileFields.image = image;
+//       if(date) profileFields.date= date;
+//       if(ticketPrice) profileFields.ticketPrice = ticketPrice;
+//     if(crowdfundTarget) profileFields.crowdfundTarget= crowdfundTarget;
+//     if(totalsoFar) profileFields.totalsoFar= totalsoFar;
+
+//         try {
+//         //create
+//             profile = new Film(profileFields);
+//             await profile.save()
+//             res.json(profile);
+//           } catch (err) {
+//             console.error(err.message);
+//             res.status(500).send('Server error');
+//           }
+//       }
+//     );
+
 // // @route    GET api/users
 // // @desc     Authenticate user & get token
 // // @access   Public

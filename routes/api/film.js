@@ -153,7 +153,7 @@ router.post('/', [
 	  	
 	  	const { 	
 	  		_id,
-	  		user,
+	  		// user,
 	  		title,
 	  		image,
 	  		cinema,
@@ -166,7 +166,7 @@ router.post('/', [
 	  	//build profile object 
 	  	const filmFields = {};
 	  	if(_id) filmFields._id = _id;
-	  	if(user) filmFields.user = user;
+	  	// if(user) filmFields.user = user;
 	  	if(title) filmFields.title = title;
 	  	if(cinema) filmFields.cinema = cinema;
 	  	if(image) filmFields.image = image;
