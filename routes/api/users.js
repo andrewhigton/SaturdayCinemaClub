@@ -7,6 +7,7 @@ const config = require('config');
 const { check, validationResult } = require('express-validator');
 const User = require('../../models/User');
 
+
 // @route    POST api/users
 // @desc     Register user
 // @access   Public
@@ -112,5 +113,24 @@ router.post('/ticket', [ auth ],
           }
       }
     );
+
+//problem was you were trying to get a user key that wasn't there
+//profile has a user key, your's don't.  
+router.delete('/ticket/:_id', [auth], async (req, res) => {
+      try {
+        const profile = await User.findOne({ _id: req.user.id });
+        const removeIndex = profile.tickets
+          .map(item => item._id)
+          .indexOf(req.params._id);
+          profile.tickets.splice(removeIndex, 1);
+          await profile.save();
+        res.json(profile);
+      } catch (err) {
+        console.error(err.message);
+        res.status(500).send('Nope');
+      }
+    })
+
+
 
 module.exports = router;

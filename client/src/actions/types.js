@@ -18,6 +18,7 @@ export const CLEAR_FILM = 'CLEAR_FILM';
 export const ACCOUNT_DELETED = 'ACCOUNT_DELETED';
 export const GET_FILM = 'GET_FILM';
 export const GET_FILMS = 'GET_FILMS';
+export const DELETE_FILM = 'DELETE_FILM';
 export const FILM_ERROR = 'FILM_ERROR';
 export const UPDATE_USER = 'UPDATE_USER';
 export const USER_ERROR = 'USER_ERROR';

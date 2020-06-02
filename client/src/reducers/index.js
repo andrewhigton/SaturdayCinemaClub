@@ -1,13 +1,28 @@
 import { combineReducers } from 'redux';
+import { persistReducer } from 'redux-persist';
+import storage from 'redux-persist/lib/storage';
 import alert from './alert';
 import auth from './auth';
-import profile from './profile';
 import film from './film';
-// import post from './post';
 
-export default combineReducers({
+const persistConfig = {
+	key: 'root',
+	storage,
+	whitelist: ['auth', 'film', 'profile']
+
+}
+
+const rootReducer = combineReducers({
 	alert,
 	auth,
 	film,
-	profile
 });
+
+export default persistReducer(persistConfig, rootReducer);
+
+// export default combineReducers({
+// 	alert,
+// 	auth,
+// 	film,
+// 	profile
+// });

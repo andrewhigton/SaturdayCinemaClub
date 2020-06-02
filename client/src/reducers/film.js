@@ -3,7 +3,8 @@ import {
   UPDATE_FILM,
   GET_FILMS,
   FILM_ERROR,
-  CLEAR_FILM
+  CLEAR_FILM,
+  DELETE_FILM
 } from '../actions/types';
 
 const initialState = {

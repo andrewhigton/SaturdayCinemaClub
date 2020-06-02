@@ -21,6 +21,10 @@ const FilmSchema = new mongoose.Schema({
 		type: Date,
 		required: true
 	},
+	filmtime: {
+		type: String,
+		required: false
+	},
 	ticketPrice: {
 		type: Number,
 		required: false

@@ -1,21 +1,31 @@
 import React from 'react';
+import '../../App.scss';
+
 const moment = require('moment');
 
+
+//so yo ueither have to import all at same size
+//or do media queries with varying sizes 
+//standard images shrink to fit, background don't
 const ImageSlide = ({ url, title, cinema, date, className }) => {
+  
   const styles = {
     backgroundImage: `url(${url})`,
     backgroundSize: 'cover',
+    backgroundRepeat: 'no-repeat',
     backgroundPosition: 'center',
+    backgroundSize: '100%',
     transition: 'all 0.6s linear',
-    // animation: 'slideshow 1s linear infinite'
+    objectFit: 'contain',
+    // borderBottom: 'solid 10px'
   };
 
   const time = moment(date)
   const formattedDate = time.format('MMMM Do YYYY, h:mm a');
-
+  
   return (
     <div 
-    className={className} 
+    className={'image-slide'}
     style={styles}
     title={title}
    	cinema={cinema}

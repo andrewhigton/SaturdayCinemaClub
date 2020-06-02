@@ -1,5 +1,5 @@
 import React from 'react';
-import './Tickets.scss';
+//import './Tickets.scss';
 
 
 const Ticket = ({ ticket }) => {
@@ -27,7 +27,6 @@ const { title,
 		  </div>
 		  <div className="ticket__body">
 		    <section className="ticket__section">
-		      <h3>Your Tickets</h3>
 		      <p>Film: {title}</p>
 		      <p>Date: {date}</p>
 		      

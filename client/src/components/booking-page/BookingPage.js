@@ -1,31 +1,26 @@
-// 6 fix css, make flexy for mobile
-// 7 api call on film page? imdb, wiki?  
-// 9 need to add stripe checkout details   
-
 import React, { useEffect, useState, Fragment } from 'react';
 import { useParams} from 'react-router';
 import { Link, withRouter, Redirect } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import Spinner from '../layout/Spinner';
 import { connect } from 'react-redux';
+//import { updateFilm } from '../../actions/film';
 import { getFilmById, updateFilm } from '../../actions/film';
 import CheckoutFilm from '../checkout-film/Checkout-Film'
-// import { getCurrentProfile, getFilmById } from '../../actions/profile';
-// import { updateFilm } from '../../actions/profile';
 import StripeCheckoutButton from '../../components/stripe-button/stripe-button';
-//import queryString from 'query-string';
+
 
 const FilmPage = ({
 	updateFilm,
 	getFilmById,
 	film: {film, loading},
 	match,
-	// profile: { profile, loading },
 	history
 }) => {
-	useEffect(() => {
-		getFilmById(match.params._id);
-  	}, [loading, getFilmById]);
+	// useEffect(() => {
+	// 	getFilmById(match.params._id);
+ //  	}, [getFilmById]);
+//console.log(film)
 
 //this creates the state
 	const [formData, setFormData] = useState({
@@ -55,9 +50,9 @@ const FilmPage = ({
 	      ticketPrice: film.ticketPrice,
 	      crowdfundTarget: film.crowdfundTarget,
 	      totalsoFar: film.totalsoFar
-	    		});
-			 }
-	   }, [loading, getFilmById]);
+    		});
+		 }
+   },[]);
 
 	const {
 		_id,
@@ -81,12 +76,17 @@ const FilmPage = ({
 	
 	if (film === null) return null;
 	return (
-		<div>
+		<Fragment>
+
 			<CheckoutFilm
 			film={film}
 			 />
-			}
-		</div>
+		<div className='checkout-page'>
+          * Please use the following test credit card for payments  
+          <br />
+          4242 4242 4242 4242 - Exp 01/21 - CVV: 123
+        </div>
+        </Fragment>
 		)
 	};
 

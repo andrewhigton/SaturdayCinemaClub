@@ -6,6 +6,7 @@ import {
   GET_FILMS,
   CLEAR_FILM,
   FILM_ERROR,
+  DELETE_FILM
 } from './types';
 //import setAuthToken from '../utils/setAuthToken';
 
@@ -52,7 +53,7 @@ export const getFilmById = film_id => async dispatch => {
     //this is the next problem. it's not returning anything. why?
     const res = await axios.get(`/api/film/${film_id}`)
     // .populate('film', ['title', 'cinema']);
-    // console.log(res)
+    
     dispatch({
       type: GET_FILM,
       // payload: { msg: res.data }
@@ -66,9 +67,40 @@ export const getFilmById = film_id => async dispatch => {
   }
 };
 
+// create film
+export const createFilm = ( formData, history ) => async dispatch => {
+  try {
+    const config = {
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    };
+  
+    const res = await axios.post('/api/film/create-film', formData, config);    
+    dispatch({
+      type: GET_FILM,
+      payload: res.data
+    });
+    history.push('/film/dashboard');
+  } catch (err) {
+    const errors = err.response.data.errors;
+
+    if (errors) {
+      errors.forEach(error => dispatch(setAlert(error.msg, 'danger')));
+    }
+
+    dispatch({
+      type: FILM_ERROR,
+      payload: { msg: err.response.statusText, status: err.response.status }
+    });
+  }
+};
+
 export const updateFilm = (formData, history) => async dispatch => {
+  //console.log(formData)
   dispatch({ type: CLEAR_FILM });
   try {
+    //console.log(formData)
     const config = {
       headers: {
         'Content-Type': 'application/json'
@@ -87,7 +119,7 @@ export const updateFilm = (formData, history) => async dispatch => {
     //still doesn't work, first time
     //history.push(getFilmById(`/api/film/booking/${film_id}`));
     //if you canget this to work after payment is succesful?? ideal
-    history.push('/');
+    //history.push('/');
   } catch (err) {
     const errors = err.response.data.errors;
 
@@ -101,6 +133,27 @@ export const updateFilm = (formData, history) => async dispatch => {
     });
   }
 };
+
+export const deleteFilm = id => async dispatch => {
+  try {
+    const res = await axios.delete(`/api/profile/tickets/${id}`);
+
+    dispatch({
+      type: DELETE_FILM,
+      payload: res.data
+    });
+
+    dispatch(setAlert('Tickets Removed', 'success'));
+  } catch (err) {
+    dispatch({
+      type: FILM_ERROR,
+      payload: { msg: err.response.statusText, status: err.response.status }
+    });
+  }
+};
+
+
+
 
 // export const getFilms = () => async dispatch => {
 //   dispatch({ type: CLEAR_FILM });

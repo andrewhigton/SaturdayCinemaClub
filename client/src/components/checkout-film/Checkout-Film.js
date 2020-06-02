@@ -1,27 +1,26 @@
-import React, { useEffect, useState, Fragment } from 'react';
+import React, { useState, Fragment } from 'react';
 import { connect } from 'react-redux';
 import { useParams} from 'react-router';
 import { useSelector, useDispatch } from 'react-redux';
 import { Link, withRouter, Redirect } from 'react-router-dom';
 import StripeCheckoutButton from '../../components/stripe-button/stripe-button';
 import PropTypes from 'prop-types';
-import { getFilmById, updateFilm } from '../../actions/film';
-//import { updateUserTickets } from '../../actions/profile';
 import { updateUserTickets } from '../../actions/auth';
-//import { UPDATE_FILM } from '../../actions/types';
-//import './checkout-item.styles.scss';
+// import { updateFilm } from '../../actions/film';;
 
-//when you buy a ticket, it swtiches to jim. why?
+//import './checkout-item.styles.scss';
 
 const CheckoutFilm = ({ 
   film: {film, loading}, 
   match, 
-  getFilmById, 
-  updateFilm, 
+  // getFilmById, 
+  // updateFilm, 
   updateUserTickets,
   history }) => {
   // let bookingTotal = 0;
-
+  //console.log(match)
+  //console.log(film)
+  //console.log('checkoutpage')
   const [filmData, setFilmData] = useState({
     _id: film._id,
     user: film.user,
@@ -67,32 +66,19 @@ const CheckoutFilm = ({
      numberOfTickets: ticketsTotal });
   } 
 
-  const onSubmit = (e) => {
-    e.preventDefault();
-    updateFilm(filmData, history);
-    updateUserTickets(ticketData, history);
-  };
-
-  if (film === null) return null;
+  // if (film === null) return null;
   return (
-    <div className="film">
-    <div>
-      <form>
-      <div className='checkout-page how-it-works'>
-        <div className='checkout-header'>
-          <div className='header-block'>
-
+      <>
+      <div className='checkout-page'>
+          <div>
             <span>Film: {film.title}</span>
           </div>
-          
-          <div className='header-block'>
+          <div>
             <span>Date: {film.date} </span>
           </div>
-          
           <div className='header-block'>
             <span>Price: £{film.ticketPrice} </span>
           </div>
-          
           <div className='header-block'>
             <span>Crowdfunding Target: {film.crowdfundTarget} </span>
           </div>
@@ -100,58 +86,48 @@ const CheckoutFilm = ({
           className='header-block'>
             <span>Tickets sold: {film.totalsoFar}</span>
           </div>
-        </div>
-        </div>
-        </form>
-      
-
-          <div className='header-block'>
+        
+        <form className="form">
+          <div className=" form-ticket">   
             <input
               type='number'
               placeholder='Enter number of tickets'
               name='tickets'
-              //onInput={e => setBookingCost({ parseInt({film.ticketPrice}) * parseInt(e.target.value)}) }
               onChange={e => onChange(e)}
+              required
             />
-          </div>
-          <div className='header-block'>
+          </div>  
+        </form>
+          <div>
             <span>Basket total: £{bookingCost}</span>
           </div>
           <div>
-          <Link className='btn btn-light my-1' to='/dashboard'>Go Back
-          </Link>
-          </div>
-          <div>
-          <div className='test-warning'>
-          * Please use the following test credit card for payments  
-          <br />
-          4242 4242 4242 4242 - Exp 01/21 - CVV: 123
-          </div>
-            <span onClick={e => onSubmit(e)}> 
-              <StripeCheckoutButton price={bookingCost} />
+            <span> 
+              <StripeCheckoutButton
+               filmData={filmData}
+               ticketData={ticketData}
+               price={bookingCost} 
+               />
             </span>
+            <div>
+            <Link className='btn btn-back' to='/film/dashboard'>Go Back
+            </Link>
+            </div>
           </div>
-        </div>
-      </div>
+          </div>
+        </>
   )
 }
 
 CheckoutFilm.propTypes = {
-  updateFilm: PropTypes.func.isRequired,
   updateUserTickets: PropTypes.func.isRequired,
-  getFilmById: PropTypes.func.isRequired,
   film: PropTypes.object.isRequired,
-};
+}
 
 const mapStateToProps = state => ({
   film: state.film
 });
 
 export default connect(mapStateToProps, { 
-  getFilmById, 
-  updateFilm, 
   updateUserTickets 
 })(withRouter(CheckoutFilm));
-
-//<button>Press</button>
-              

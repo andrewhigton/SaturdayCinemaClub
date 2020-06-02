@@ -5,12 +5,14 @@ import {
   REGISTER_FAIL,
   USER_LOADED,
   USER_ERROR,
-  AUTH_ERROR,
+  // AUTH_ERROR,
   UPDATE_USER,
   LOGIN_SUCCESS,
   LOGIN_FAIL,
   LOGOUT,
-  CLEAR_PROFILE
+  // CLEAR_PROFILE,
+  // GET_FILM,
+  // FILM_ERROR
 } from './types';
 
 import setAuthToken from '../utils/setAuthToken';
@@ -98,6 +100,8 @@ export const login = (email, password) => async dispatch => {
   }
 };
 
+
+
 // Add Tickets
 export const updateUserTickets = (formData, history) => async dispatch => {
   try {
@@ -108,16 +112,15 @@ export const updateUserTickets = (formData, history) => async dispatch => {
     };
 
     const res = await axios.post('/api/users/ticket', formData, config);
-
     dispatch({
       type: UPDATE_USER,
       payload: res.data
     });
-
-    dispatch(setAlert('Tickets Added', 'success'));
-
-    history.push('/film/dashboard');
+    //also need to do this after payment has completed
+    //dispatch(setAlert('Tickets Added', 'success'));
+    //history.push('/film/dashboard');
   } catch (err) {
+    //console.log('error')
     const errors = err.response.data.errors;
 
     if (errors) {
@@ -132,7 +135,7 @@ export const updateUserTickets = (formData, history) => async dispatch => {
 
 export const deleteTickets = id => async dispatch => {
   try {
-    const res = await axios.delete(`/api/auth/tickets/${id}`);
+    const res = await axios.delete(`/api/tickets/${id}`);
 
     dispatch({
       type: UPDATE_USER,

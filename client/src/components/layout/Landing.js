@@ -11,7 +11,7 @@ import Carousel from '../carousel/Carousel';
 const Landing = ({ 
 	isAuthenticated, 
 	loadFilms,
-	// film: {films} 
+	film: {films} 
 	}) => {
 	  useEffect(() =>  {
     	loadFilms();	
@@ -24,7 +24,7 @@ const Landing = ({
 	return (
 		<section className="landing dark-overlay">
 	      <div className="carousel">
-		    <Carousel/>	          
+		    <Carousel film={films}/>	          
 	       </div>
 	       <div>
 			<Films/>	       	
@@ -37,12 +37,12 @@ const Landing = ({
 Landing.propTypes = {
   loadFilms: PropTypes.func.isRequired,
   isAuthenticated: PropTypes.bool,
-  // film: PropTypes.object.isRequired
+  film: PropTypes.object.isRequired
 };
 
 const mapStateToProps = state => ({
   isAuthenticated: state.auth.isAuthenticated,
-  // film: state.film
+  film: state.film
 });
 
 export default connect(mapStateToProps, { loadFilms })(Landing);

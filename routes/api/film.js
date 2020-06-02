@@ -5,11 +5,6 @@ const Film = require('../../models/Film');
 // const config = require('config');
 const { check, validationResult } = require('express-validator');
 
-//here you need
-// 1 get one films
-// 2 get all films
-// 3 update film (for tickets)
- 
 // @route GET api/film
 		// @desc GET all films
 		// @access Public	
@@ -24,47 +19,63 @@ const { check, validationResult } = require('express-validator');
 			}
 		});
 
-		// @route GET api/film/current
-		// @desc get current users profile
-		// @access Private
-		//this did't work
-		//trying to get state.film to load, why not?  
-		
-		//try this again
-		// router.get('/current/', auth, async (req, res) => {
-		//   try {
-		//     const profile = await Film.findOne({
-		//       title: req.body.title
-		//     }).populate('film', ['title', 'cinema']);
 
-		//     if (!profile) {
-		//       return res.status(400).json({ msg: 'There is no profile for this user' });
-		//     }
+router.post('/create-film', [
+    auth, 
+    [
+    check('title', 'title is required').not().isEmpty(),
+    check('cinema', 'cinema is required').not().isEmpty(),
+    check('date', 'date is required').not().isEmpty(),
+    check('image', 'image is required').not().isEmpty()
 
-		//     res.json(profile);
-		//   } catch (err) {
-		//     console.error(err.message);
-		//     res.status(500).send('Server Error');
-		//   }
-		// });
+    ]
+    ],
+    async (req, res) => {
+      const errors = validationResult(req)
+      if(!errors.isEmpty()) {
+        return res.status(400).json({ errors: errors.array() });
+      }
 
+      const {   
+        user,
+        image,
+        title,
+        cinema,
+        date,
+        filmtime,
+        ticketPrice,
+        crowdfundTarget,
+        totalsoFar
+      } = req.body;
 
+      //build profile object 
+      const profileFields = {};
+      profileFields.user = req.user.id;
+      if(title) profileFields.title = title;
+      if(cinema) profileFields.cinema = cinema;
+      if(image) profileFields.image = image;
+      if(date) profileFields.date= date;
+      if(filmtime) profileFields.filmtime= filmtime;
+      if(ticketPrice) profileFields.ticketPrice = ticketPrice;
+    if(crowdfundTarget) profileFields.crowdfundTarget= crowdfundTarget;
+    if(totalsoFar) profileFields.totalsoFar= totalsoFar;
 
-		// router.get('/:id', async (req, res) => {
-		// 	try {
-		// 		const films = await Film.findOne({ film: req.params.id} ).populate('films', 
-		// 		['title', 'cinema']);
-		// 		res.json(films)
-		// 	} catch (err) {
-		// 		console.error(err.message);
-		// 		res.status(500).send('Server Error');
-		// 	}
-		// });
+        try {
+        //create
+            profile = new Film(profileFields);
+            await profile.save()
+            res.json(profile);
+          } catch (err) {
+            console.error(err.message);
+            res.status(500).send('Server error');
+          }
+      }
+    );
 
 
 
 // @route POST api/film
-// @desc Create or update film
+// @desc update film
 // @access Private
 router.post('/', [
     check('title', 'Title is required')
@@ -87,6 +98,7 @@ router.post('/', [
     	user_id,
     	title, 
     	date, 
+    	filmtime,
     	cinema,
     	image, 
     	ticketPrice, 
@@ -98,6 +110,7 @@ router.post('/', [
 	  	if(user_id) filmFields.user_id = user_id;
 	  	if(title) filmFields.title = title;
 	  	if(date) filmFields.date = date;
+	  	if(filmtime) filmFields.filmtime = filmtime;
 	  	if(cinema) filmFields.cinema = cinema;
 	  	if(ticketPrice) filmFields.ticketPrice= ticketPrice;
 	  	if(crowdfundTarget) filmFields.crowdfundTarget= crowdfundTarget;
@@ -107,7 +120,8 @@ router.post('/', [
       film = new Film({
         user_id,
         title, 
-    	date, 
+    	date,
+    	filmtime, 
     	cinema,
     	image,
     	ticketPrice, 
@@ -123,15 +137,7 @@ router.post('/', [
         }
       }
 
-      // jwt.sign(
-      // 	payload, 
-      // 	config.get('jwtSecret'),
-      // 	(err, token) => {
-      // 		if(err) throw err;
       		res.json({ film })
-      	// });
-
-      // res.send('User registered');	
 		} catch (err) {
       console.error(err.message);
       res.status(500).send('Server error');
@@ -158,6 +164,7 @@ router.post('/', [
 	  		image,
 	  		cinema,
 	  		date,
+	  		filmtime,
 	  		ticketPrice,
 			crowdfundTarget,
 			totalsoFar
@@ -171,6 +178,7 @@ router.post('/', [
 	  	if(cinema) filmFields.cinema = cinema;
 	  	if(image) filmFields.image = image;
 	  	if(date) filmFields.date= date;
+	  	if(filmtime) filmFields.filmtime= filmtime;
 	  	if(ticketPrice) filmFields.ticketPrice = ticketPrice;
 		if(crowdfundTarget) filmFields.crowdfundTarget= crowdfundTarget;
 		if(totalsoFar) filmFields.totalsoFar= totalsoFar;
@@ -192,58 +200,10 @@ router.post('/', [
 			}
 		);
 	
-		// router.get('/:film_id', async (req, res) => {
-	 //  	const errors = validationResult(req)
-	 //  	if(!errors.isEmpty()) {
-	 //  		return res.status(400).json({ errors: errors.array() });
-	 //  	}
-	  	
-	 //  	const { 	
-	 //  		_id,
-	 //  		user,
-	 //  		title,
-	 //  		image,
-	 //  		cinema,
-	 //  		date,
-	 //  		ticketPrice,
-		// 	crowdfundTarget,
-		// 	totalsoFar
-	 //  	} = req.body;
-
-	 //  	//build profile object 
-	 //  	const filmFields = {};
-	 //  	if(_id) filmFields._id = _id;
-	 //  	if(user) filmFields.user = user;
-	 //  	if(title) filmFields.title = title;
-	 //  	if(cinema) filmFields.cinema = cinema;
-	 //  	if(image) filmFields.image = image;
-	 //  	if(date) filmFields.date= date;
-	 //  	if(ticketPrice) filmFields.ticketPrice = ticketPrice;
-		// if(crowdfundTarget) filmFields.crowdfundTarget= crowdfundTarget;
-		// if(totalsoFar) filmFields.totalsoFar= totalsoFar;
-	 //  		// console.log(filmFields)	
-	 //  		try {
-	 //  			//const updatedFilm = await Film.findOne({ films: req._id });
-	 //  			let findFilm = await Film.findOne({ _id: req.params.film_id });
-		// 			//console.log(res.json(updatedFilm))
-	 //  				// updatedFilm = await Film.findOneAndUpdate(
-	 //  				// 	{ _id: req.params.film_id },
-	 //  				// 	{ $set: filmFields },
-	 //  				// 	{ new: true }
-	 //  				// 	)
-	 //  				return res.json(findFilm)
-		//   		} catch (err) {
-		//   			console.error(err.message);
-		//   			res.status(500).send('Server error');
-		//   		}
-		// 	}
-		// );
-
-	router.get('/:id', async (req, res) => {
+	
+	router.get('/:film_id', async (req, res) => {
 		try {
-		const film = await Film.findOne({ _id: req.params.id })
-		// .populate('film', 
-		// 	['title', 'cinema']);
+		const film = await Film.findOne({ _id: req.params.film_id })
 		if(!film) return res.status(400).json({ msg: 'no film for this search'})
 			return res.json(film)
 		} catch (err) {
@@ -263,12 +223,13 @@ router.post('/', [
 		//it works though. just log in
 		//problem is, anyone logged in can delete!
 		//how to restrict it to one master user? 
+		//just remove auth, and don't put it on the site
 		router.delete('/:film_id', auth, async (req, res) => {
 			try {
 				await Film.findOneAndRemove(req.params.film_id)
 				//remove user
 				// await User.findOneAndRemove({ _id: req.user.id})
-				res.json({ msg: 'User deleted' });
+				res.json({ msg: 'Film deleted' });
 			} catch (err) {
 				console.error(err.message);
 				res.status(500).send('Server Error');
@@ -276,60 +237,3 @@ router.post('/', [
 		});
 
 module.exports = router;
-
-
-
-	// @route PUT api/film/edit
-	// @desc Edit film
-	// @access Public
-
-
-	// router.put('/', async (req, res) => {
-	    
- //    const { 
- //    	title, 
- //    	date, 
- //    	cinema, 
- //    	ticketPrice, 
- //    	crowdfundTarget, 
- //    	totalsoFar 
- //    	} = req.body;
-
- //    try {
- //      let film = await Film.findOne( { title } );
-
- //      if (film) {
- //      	// const  filter = { title: "Bladerunner"};
-	//      //return res.json(film)
-	//     //console.log(film)
-	//     const filter = { film };
-	//     const update = {cinema: "Picturehouse"};
-	// 	//console.log(filter)
-	// 	//console.log(update)
- //      	film = await Film.findOneAndUpdate( filter, update,
- //      		// console.log(film.title)
- //      		//console.log(req.body._id)
- //      		// { film: req.film.id },
- //      		// {$set: {'film.title': 'title'}},
- //      		{ new: true }
- //      		);
- //      	//await film.save();
- //      	return res.json(film)
- //      	}      	
-      	// }
-
-     
-      // const payload = {
-      //   film: {
-      //     id: film.id
-	     //    }
-	     //  }
-      // 		res.json({ film })
-// 		} catch (err) {
-//       console.error(err.message);
-//       res.status(500).send('Server error');
-//     }
-//   }
-// );
-
-		

@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link, Redirect } from 'react-router-dom';
-import '../../App1.css';
+import '../../App.scss';
 
 const HowItWorks = () => {
 

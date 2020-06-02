@@ -30,7 +30,7 @@ const Login = ( { login, isAuthenticated } ) => {
 
 return <Fragment>
 			<h1 className="large text-primary">Sign In</h1>
-		      <p className="lead"><i className="fas fa-user"></i>Sign in to your account</p>
+		      <p className="lead">Sign in to your account</p>
 		      <form className="form" action="create-profile.html" onSubmit={e => onSubmit(e)}>
 		        <div className="form-group">
 		          <input type="email" 
@@ -52,8 +52,8 @@ return <Fragment>
 		        </div>
 		        <input type="submit" className="btn btn-primary" value="Login" />
 		      </form>
-		      <p className="my-1">
-		        Don't have an account? <Link to="/register">Sign Up</Link>
+		      <p className="no-account">
+		        Don't have an account? <Link className="reg" to="/register">Sign Up</Link>
 		      </p>
 		   </Fragment>
 }

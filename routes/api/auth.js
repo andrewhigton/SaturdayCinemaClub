@@ -120,7 +120,7 @@ router.post('/ticket', [
       }
     );
 
-    router.delete('/tickets/:exp_id', auth, async (req, res) => {
+    router.delete('/ticket/:exp_id', auth, async (req, res) => {
       try {
         const profile = await User.findOne({ user: req.body.email });
         const removeIndex = profile.tickets
@@ -134,6 +134,9 @@ router.post('/ticket', [
         res.status(500).send('Nope');
       }
     })
+
+
+
 
 
 // router.post('/create-film', [
