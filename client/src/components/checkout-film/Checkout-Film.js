@@ -6,6 +6,7 @@ import { Link, withRouter, Redirect } from 'react-router-dom';
 import StripeCheckoutButton from '../../components/stripe-button/stripe-button';
 import PropTypes from 'prop-types';
 import { updateUserTickets } from '../../actions/auth';
+import './checkoutfilm.scss'
 // import { updateFilm } from '../../actions/film';;
 
 //import './checkout-item.styles.scss';
@@ -110,7 +111,7 @@ const CheckoutFilm = ({
                />
             </span>
             <div>
-            <Link className='btn btn-back' to='/film/dashboard'>Go Back
+            <Link className='checkout-button btn btn-back' to='/film/dashboard'>Go Back
             </Link>
             </div>
           </div>

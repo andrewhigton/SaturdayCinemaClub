@@ -1,6 +1,8 @@
 import React from 'react';
 import { Link, Redirect } from 'react-router-dom';
+import Footer from '../footer/Footer';
 import '../../App.scss';
+import './howitworks.scss';
 
 const HowItWorks = () => {
 
@@ -15,7 +17,7 @@ Fans can start by creating their own screening, or by booking tickets to screeni
 For first-time hosts or first-time ticket buyers, this page is designed to help you navigate the waters to creating a screening and booking a ticket. Our hosts held over 500 screenings last year, but it always helps to have Hooper driving the boat.
 				</p>
 	       </div>
-
+	    <Footer />
 	    </section>
 		)
 	}

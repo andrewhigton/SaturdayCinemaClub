@@ -6,6 +6,7 @@ import PropTypes from 'prop-types';
 import Spinner from '../layout/Spinner';
 import { connect } from 'react-redux';
 import Ticket from '../ticket/Ticket';
+import Footer from '../footer/Footer';
 import { loadFilms } from '../../actions/film';
 import DashboardTickets from './Dashboard-Tickets';
 import DashboardFilms from './Dashboard-Films';;
@@ -21,8 +22,13 @@ const Dashboard = ({
       loadFilms();  
   }, [loadFilms]);
 
+  // console.log(user);
+
 return ( 
         <Fragment>
+          <div>
+          <h2 className='welcome-message'>Welcome {user && user.name} — Your tickets and screenings</h2>
+          </div>
           <div className="dashboard-display">
           <DashboardTickets
           user={user}
@@ -33,7 +39,7 @@ return (
           films={films}
           />
           </div>
-          
+          <Footer />
         </Fragment>
       )
 }
@@ -49,4 +55,4 @@ const mapStateToProps = state => ({
  film: state.film,
 });
 
-export default connect(mapStateToProps, { loadFilms })(Dashboard);                              
+export default connect(mapStateToProps, { loadFilms })(Dashboard);

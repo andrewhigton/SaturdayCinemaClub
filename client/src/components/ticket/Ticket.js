@@ -1,5 +1,5 @@
 import React from 'react';
-//import './Tickets.scss';
+import './Tickets.scss';
 
 
 const Ticket = ({ ticket }) => {
@@ -18,8 +18,8 @@ const { title,
         <article className="ticket">
 		  <header className="ticket__wrapper">
 		    <div className="ticket__header">
-		      🎟
-		    </div>
+		    	<img src="/cine-ticket.jpeg" className="ticket-stub"/>
+		  	</div>
 		  </header>
 		  <div className="ticket__divider">
 		    <div className="ticket__notch"></div>

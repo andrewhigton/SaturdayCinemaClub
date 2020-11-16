@@ -8,30 +8,38 @@
 
 * {
   box-sizing: border-box;
-  margin: 0;
-  padding: 0;  
+  /*margin: 0;*/
+  padding: 0;
+  /*width: 102vw;*/
+  max-width: 102vw;  
 }
 
 body {
   font-family: 'Raleway', sans-serif;
-  font-size: 1rem;
+  /*font-size: 5em;*/
   line-height: 1.6;
   background-color: #fff;
   color:white;
   background-color: rgba(0, 0, 0, 0.4);
+  max-width: 97%;
   /*position: relative;*/
-  width: 100%;
+  /*width: 100%;*/
   height: 100%;
+  -webkit-text-size-adjust: none;
+  overflow-x: hidden;
 }
 
+a {
+  color: #864747;
+}
 
 h1 {
-  font-size: 40px;
-  display: flex;
-  flex-wrap: wrap;
+  /*font-size: 1em;*/
+  /*display: flex;
+  flex-wrap: wrap;*/
 }
 
-.arrows {
+/*.arrows {
   position: absolute;
   z-index: 2;
   font-size: 35px;
@@ -49,9 +57,9 @@ h1 {
 .slide-arrow-prev {  
   margin-right: 70px;
 }
+*/
 
-
-.image-slide {
+/*.image-slide {
     width: 100%;
     position: absolute;
     top: -80px;
@@ -60,62 +68,98 @@ h1 {
     padding: 0.7rem 2rem;
     z-index: 0;
 }
+*/
 
-.inset-text {
+
+
+/*.inset-text {
   font-family: 'Raleway', sans-serif;
   position: absolute;
-  font-size: 20px;
+  font-size: 2em;
   color: white;
-  /*position: relative;*/
   left: 30px;
   top: 575px;
-}
+}*/
 
 /*xy*/
+
+.welcome-message {
+  font-size: 1.7em;
+  margin-left: 15px;
+  margin-bottom: 2vh; 
+  font-family: 'Raleway', sans-serif;
+}
+
+
+/*//older media queires*/
 @media screen and (max-width: 1200px) {  
   body .inset-text {
   top: 530px;
   }
   
-  .arrows {
-  font-size: 35px;
-  top: 500px;
-  left: 500px;
-}
-
-body .all-screenings {
-    margin-top: 550px;
+  .hamburgerDiv {
+  display: none;
+  margin-top: -7vh;
   }
 
+  .hamburgDiv-loggedin {
+  display: none;
+  }
+
+  .dropdown {
+    display: block;
+  }
 }
+
+
 
 @media screen and (max-width: 1100px) {  
 
-  body .all-screenings {
-    margin-top: 520px;
+body .all-screenings {
+    /*margin-top: 520px;*/
   }
+
+  .top-row {
+  display: none
+  }
+
+  .dropdown {
+    display: inline-block;
+    font-family: 'Raleway', sans-serif;
+    font-size: 0.8em;
+    position: absolute !important;
+    background-color: white;
+    width: 100%;
+    left: 1vw;
+    top: 6vh;
+    margin-left: -1vw;
+    margin-top: 0vh;
+    /*box-shadow: 0px 8px 0px 0px #864747;*/
+    z-index: 1;
+    /*height: 5vh;*/
+  }
+  
+  .hamburgerDiv {
+  display: block;
+  margin-top: -7vh;
+  }
+
+  .hamburgDiv-loggedin {
+  display: block;
+  }
+
 }
 
-
-
-@media screen and (max-width: 1000px) {  
+@media screen and (max-width: 999px) {  
+  
   body .inset-text {
     font-size: 15px;
     top: 510px;
   }
-  
-  .arrows {
-  font-size: 35px;
-  top: 450px;
-  left: 400px;
-  }
-
-  body .all-screenings {
-    margin-top: 490px;
-  }
 }
 
 @media screen and (max-width: 900px) {  
+  
   body .inset-text {
     font-size: 14px;
     top: 500px;
@@ -128,7 +172,11 @@ body .all-screenings {
   }
 
    body .all-screenings {
-    margin-top: 440px;
+    /*margin-top: 440px;*/
+  }
+
+  .reg-dropdown {
+    margin-left: 0.5vw;
   }
 
 }
@@ -145,121 +193,33 @@ body .all-screenings {
   top: 440px;
   }
 
+  body h1 {
+    /*font-size: 32px;*/
+  }
+
   .all-screenings {
-  max-width: 770px;
+  /*max-width: 770px;*/
   }
 
   .register, .login, .howitworks {
     display: none;
-    }
+  }
+
+  .reg-dropdown {
+    margin-left: 1vw;
+  }
 
   .how-loggedin, .films-tickets-link, .logout  {
     display: none;
   }
 
-  .hamburgerDiv { 
-    display: block;
-    margin-top: 2px;
-    }
-
-
-  .hamburger { 
-    width: 30px;
-    height: 4px;
-    background-color: white;
-    margin: 5px 0;
-    display: flex;
-    }
-
-  .dropdown {
-    position: absolute;
-    left: 0;
-    top: 50px;
-    float: none;
-    display: inline-flex;
-    text-align: left;
-    background-color:#87CEFA;
-    width: 100%;
-    /*box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);*/
-    z-index: 1;
-    height: 45px;
-  }
-  
-  .reg-dropdown, .films-dropdown {
-  display: inline-flex;
-  position: absolute;
-  left: 20px;
-  top: 40px;
-  color: white;
-  text-align: left;
-  z-index: 2;
-  }
-  
-  .log-dropdown {
-  display: inline-flex;
-  position: absolute;
-  left: 140px;
-  top: 40px;
-  color: white;
-  text-align: left;
-  z-index: 2;
-  }
-
-  .how-dropdown {
-  display: inline-flex;
-  position: absolute;
-  left: 230px;
-  top: 40px;
-  color: white;
-  text-align: left;
-  z-index: 2;  
-  }
-
-  .how-auth-dropdown {
-  display: inline-flex;
-  position: absolute;
-  left: 105px;
-  top: 72px;
-  color: white;
-  text-align: left;
-  z-index: 2;  
-  }
-
-  .logout-dropdown {
-  display: inline-flex;
-  position: absolute;
-  left: 320px;
-  top: 40px;
-  color: white;
-  text-align: left;
-  z-index: 2; 
-  }
-
-  h1 {
-    font-size: 35px;
-    flex-wrap: wrap;
-  }
-
-  .navbar {
-    max-height: 60px;
-  }
-
-  .main-title-subdeck {
-    display: none;
-  }
-
+  /**/
   body .image-slide {
     top: -150px; 
   }
   
-  .arrows {
-    /*display: none;*/
-/*    top: 2000px;*/
-    right: 2000px; 
-  }
- 
   body .all-screenings {
-    margin-top: 370px;
+    /*margin-top: 370px;*/
   }
 
 }
@@ -270,20 +230,24 @@ body .image-slide {
   }
   
 body .all-screenings {
-    margin-top: 300px;
-  }
+    /*margin-top: 300px;*/
+    }
 
 body .inset-text {
   font-size: 15px;
   top: 410px;
-}
-
-body .hamburgerDiv {
-    margin-top: 1px
   }
+
+body .hamburger {
+  display: block;
+  }
+
+body h1 {
+  font-size: 2.3rem;
+  }  
 }
 
-@media screen and (max-width: 542px) {  
+@media screen and (max-width: 562px) {  
  
   body .inset-text {
   font-size: 11px;
@@ -291,73 +255,65 @@ body .hamburgerDiv {
   }
 
   body .all-screenings {
-    margin-top: 220px;
+    /*margin-top: 220px;*/
+  }
+ 
+  body .navbar {
+    height: 3vh;
+    margin-top: 30px;
   }
 
- .hamburger {
-    width: 30px;
-    height: 4px;
-    margin: 4px 0;    
+  body h1 {
+  font-size: 0.85em;
+  margin-top: -1.2vh;
   }
 
- .navbar-left {
-    width: 80%;
+  .reg-dropdown {
+  margin-left: 1vw;
   }
 
-  .dropdown {
-    top: 40px;
-    height: 45px;
-  }
+  .contacts-link {
+  display: none;
+}
 
-  .reg-dropdown, .log-dropdown, .how-dropdown {
-  font-size: 19px; 
-  }
-
-  .how-auth-dropdown, .logout-dropdown, .films-dropdown {
-    font-size: 15px; 
-  }
-
-  .films-dropdown {
-    left: 20px;
-    top: 40px; 
-  } 
-
-  .logout-dropdown {
-    left: 140px;
-    top: 40px; 
-  }
-
-  .how-auth-dropdown {
-    left: 138px;
-    top: 64px; 
-  }
-
-  .reg-dropdown { 
-  top: 40px;
-  }
-  
-  .log-dropdown {
-  top: 40px;
-  left: 110px;
-  }
-
-  .how-dropdown {
-  top: 40px;
-  left: 170px;
-  }
-
-  h1 {
-  font-size: 26px;
-  line-height: 1.1;
-  margin-top: 14px;
+  body .main-title-subdeck {
+    display: none;
   }
   
   body .image-slide {
     top: -220px; 
   }
-  /*.navbar {
-    margin-top: -16px;
-  }*/
+
+  body .hamburgerDiv {
+    margin-top: -11vh;
+  }
+
+  .hamburgDiv-loggedin {
+    margin-top: -7vh;
+  }
+
+  .hamburger { 
+    width: 22px;
+    height: 3px;
+    margin: 3px;
+    }
+
+  .dropdown {
+    top: 1vh;
+  }
+
+  .navbar {
+    height: 50px;
+  }
+
+  .navbar-left {
+    margin-top: -8vh;
+  }
+
+  .reg-dropdown, .log-dropdown, .how-dropdown, .buy-dropdown, .buytickets-dropdown  {
+    font-size: 0.8em;
+    margin-right: 0.1vw;
+  }
 }
 
 @media screen and (max-width: 410px) {  
@@ -368,7 +324,7 @@ body .hamburgerDiv {
 }
 
   body .all-screenings {
-  margin-top: 160px;
+  /*margin-top: 160px;*/
   }
 
  .navbar {
@@ -377,35 +333,39 @@ body .hamburgerDiv {
   }
   
   .main-title { 
-  font-size: 30px;
-}
-
- .navbar-left {
-    width: 80%;
+  font-size: 28px;
   }
 
-  .hamburger {
-    width: 26px;
-    height: 3px;
-    background-color: white;
-    margin: 3px 0;    
+  .navbar-left {
+    width: 95%;
   }
 
- h1 {
-  font-size: 19px;
-  line-height: 1.1;
-  margin-top: 14px;
+  body .hamburgerDiv { 
+    margin-top: -10vh;
+    margin-right: -3.5em;
+    }
+
+  body .hamburgDiv-loggedin {
+    margin-top: -9.5vh;
+    margin-left: 80vw;
+  }
+
+
+  body h1 {
+  font-size: 0.7em;
+  margin-top: -1.2vh;
   }
 
   .dropdown {
-    top: 40px;
-    height: 30px;
+    top: 0vh;
+    font-size: 0.6em;
+/*    height: 3vh;*/
   }
 
-  .how-auth-dropdown, .logout-dropdown, .films-dropdown {
+/*  .how-auth-dropdown, .logout-dropdown, .films-dropdown {
     font-size: 15px; 
   }
-
+*/
   body .films-dropdown {
     left: 18px;
     top: 30px; 
@@ -420,23 +380,22 @@ body .hamburgerDiv {
     display: none;
   }
   
-  .reg-dropdown, .log-dropdown, .how-dropdown {
-  font-size: 13px; 
+  /*.reg-dropdown, .log-dropdown, .how-dropdown {
+  font-size: 5px; 
   }
-  
-  .reg-dropdown { 
+  */
+  /*.reg-dropdown { 
   top: 30px;
-  }
+  }*/
   
-  .log-dropdown {
-  top: 30px;
-  left: 80px;
-  }
-
-  .how-dropdown {
+.log-dropdown {
+    margin-left: -1.4em;
+}
+ 
+ /* .how-dropdown {
   top: 30px;
   left: 130px;
-  }
+  }*/
   
   body .image-slide {
     top: -250px; 
@@ -444,35 +403,96 @@ body .hamburgerDiv {
 
 }
 
-@media screen and (max-width: 324px) {  
+@media screen and (max-width: 362px) {  
+body .inset-text {
+  left: 16px;
+  top: 400px;
+}
+
+.reg-dropdown {
+    margin-right: -3vw;
+}
+
+.log-dropdown, .buy-dropdown, .how-dropdown, .buytickets-dropdown {
+    margin-right: -5vw;
+}
+
+body .all-screenings {
+  /*margin-top: 110px;*/
+  }
+
+/*body .all-screenings-title {
+  font-size: 25px;
+}*/
+
+.navbar {
+    height: 2vh;
+  }
+
+.logout-dropdown {
+    left: 140px;
+    top: 30px; 
+  }
+
+.navbar-left {
+    width: 90%;
+  }
+.navbar-right {
+    width: 10%;
+  }
+
+body h1 {
+  font-size: 0.6em;
+  margin-top: -1vh;;
+  }
+  
+body .image-slide {
+    top: -270px; 
+  }
+
+body .hamburgerDiv {
+    margin-top: -10vh;
+    margin-right: -3em;
+  }
+
+body .hamburgDiv-loggedin {
+    margin-top: -9.5vh;
+    margin-left: 80vw;
+}
+
+.hamburger { 
+    width: 22px;
+    height: 3px;
+    margin: 3px;
+  }
+
+.dropdown {
+    margin-right: 0vw;
+  }
+
+}
+
+@media screen and (max-width: 335px) {  
 body .inset-text {
   left: 16px;
   font-size: 8px;
   top: 400px;
 }
 
-body .hamburgerDiv {
+/*body .hamburgerDiv {
     margin-top: 1px
-  }
+  }*/
 
 body .all-screenings {
-  margin-top: 110px;
+  /*margin-top: 110px;*/
   }
 
 body .all-screenings-title {
-  font-size: 25px;
+  /*font-size: 25px;*/
 }
 
  .navbar {
-    max-height: 50px;
-  }
-
-/*  body .main-title { 
-  font-size: 25px;
-}*/
-
-  .dropdown {
-    top: 40px;
+    height: 2vh;
   }
 
   .logout-dropdown {
@@ -481,28 +501,40 @@ body .all-screenings-title {
   }
 
  .navbar-left {
-    width: 80%;
+    width: 90%;
   }
 
- h1 {
-  font-size: 15px;
-  line-height: 1.1;
-  margin-top: 16px;
+  .navbar-right {
+    width: 10%;
   }
-  body .image-slide {
-    top: -270px; 
+
+  .main-title {
+    margin-top: 2vh;  
   }
+
+ body h1 {
+  font-size: 0.5em;  
+  }
+  .dropdown {
+    font-size: 0.6em;
+  }
+
+  .hamburgDiv-loggedin {
+    margin-top: -8.7vh;
+    margin-left: 12vw;
+  }
+
 }
 
-@media screen and (max-width: 250px) {  
+@media screen and (max-width: 290px) {  
  body .inset-text {
   left: 14px;
-  font-size: 8px;
+  /*font-size: 8px;*/
   top: 390px;
 }
 
 .all-screenings {
-  margin-top: 70px;
+  /*margin-top: 70px;*/
   }
 
 
@@ -511,117 +543,38 @@ body .all-screenings-title {
   }
 
  .navbar-left {
-    width: 70%;
+    width: 90%;
+  }
+
+  .navbar-right {
+    width: 10%;
   }
 
  h1 {
-  font-size: 14px;
+  font-size: 0.45em;
   line-height: 1.1;
   margin-top: 16px;
   }
+  
   body .image-slide {
     top: -300px; 
   }
+
+  body .hamburgerDiv {
+    margin-top: -12vh;
+    margin-right: -2.5em;
+  }
 }
 
+@media screen and (max-width: 290px) {  
+.navbar-left {
+    width: 100%;  
+  }
+}
 
 
 /*ends media screens*/
 
-.navbar {
-  background-color:#87CEFA;
-  display: inline;
-  font-family: 'Marcellus SC', serif;
-  height: 100px;
-  padding: 0.7rem 2rem;
-  position: fixed;
-  top: 0; 
-  width: 100%;
-  border-bottom: solid 1px var(--primary-color);
-  z-index: 3;
-}
-
-.navbar-left {
-  display: block;
-  float: left;
-  margin-top: -60px;
-}
-
-.navbar-right {
-  display: block;
-  font-size: 24px;
-  float: right;
-}
-
-.hamburgerDiv {
-  margin-top: 5px;
-  float: right;
-}
-
-.navbar a {
-  color: #fff;
-  padding: 0.45rem;
-  margin: 0 0.25rem;
-}
-
-.navbar a:hover {
-  color: var(--primary-color);
-}
-
-.main-title { 
-  font-size: 30px;
-}
-
-.main-title-subdeck {
-    font-size: 26px;
-    margin-top: -60px;
-  
-  }
-
-  .auth {
-    display: inline-flex;
-    margin-top: -30px;
-  }
-
-  .register {
-  margin-right: -14px;
-  }
-  
-  .howitworks {
-   margin-top: 0px;
-  }
-
-  .films-tickets-link {
-    margin-right: -14px;
-  }
-
-  .loggedin {
-    font-size: 20px;
-    margin-top: 3px;
-  }
-
-  .films-dropdown {
-    left: 20px;
-    top: 40px; 
-  } 
-
-  .logout-dropdown {
-    margin-top: 0px;
-  }
-
-  .how-auth-dropdown {
-    margin-top: -1.6em;
-    margin-left: 4em;
-  }
-
-  .how-loggedin {
-    margin-top: -1.6em;
-    margin-left: 4em;
-  }
-
-  .logout {
-  margin-top: 0px;
-}
 
 .landing {
   height: 100%;
@@ -632,41 +585,7 @@ body .all-screenings-title {
   font-size: 22px;
 }
 
-.your-tickets {
-  margin-top: 20px;
-  display: flex;
-  flex-wrap: wrap;
-}
 
-.your-films {
-  display: block;
-  display: flex;
-  flex-wrap: wrap;
-  padding-top: 50px;
-  margin-left: -10px;
-}
-
-.your-film-header {
-  margin-bottom: -20px;
-  margin-top: 30px;
-  margin-left: 5px; 
-}
-.singleTicket {
-  margin-left: 8px;
-}
-
-
-
-.dark-overlay {
-  /*background-color: rgba(0, 0, 0, 0.7);
-  /*position: relative;*/
-  /*top: 50px;
-  left: 0;
-  width: 100%;
-  height: 1000px;
-  margin-top: -100px;*/
-  
-}
 
 /*.img {
   height: 100px;
@@ -705,7 +624,6 @@ ul {
   margin-left: 1.4rem;
   margin-top: 1.7rem;
   width: auto;
-  /*margin-left: 20px;*/
   margin-right: 0.5rem;
   transition: opacity 0.2s ease-in;
   outline: none;
@@ -749,144 +667,25 @@ img {
   border-radius: 3px 0 0 3px;
 }
 
-.all-screenings {
-width: 100%;
-height: auto; 
-position: relative;
-/*top: 800px;*/
-margin-top: 600px;
-margin-left: auto;
-margin-right: auto;
-padding-right: 10px;
-padding-left: 10px;
-}
-
-.all-screenings-title {
+.dark-overlay {
+/*  background-color: rgba(0, 0, 0, 0.7);
   position: relative;
-  font-size: 30px;
-  font-family: 'Raleway', sans-serif;
+  top: 50px;
+  left: 0;
   width: 100%;
-  top: -70px;
-  left: 25px; 
-  /*height: 100px;*/
-  color: white;
+  height: 1000px;
+  margin-top: -100px;
+*/  
 }
 
-.films-list {
-    display: inline-flex;
-    flex-wrap: wrap;
-    height: auto;
-    margin-top: -20px;
-    margin-bottom: 200px;
-    color: white;
-    font-size: 20px;
-    /*max-width: 100px;*/
-    /*top: -350px;*/
-    /*position: relative;*/
+.dashboard-display {  
+  display: inline-flex;
+  flex-wrap: wrap;
+  margin-top: -2vh;
 }
 
-.film {
-    height: auto;
-    width: 320px;
-    border: 5px solid gray;
-    margin-left: 20px;
-    margin-right: 10px;
-    margin-bottom: 20px;
-    padding: 23px;
-}
-
-.custom-button {
-  min-width: 165px;
-  width: auto;
-  height: 50px;
-  color: white;
-  letter-spacing: 0.5px;
-  line-height: 50px;
-  padding: 0 35px 0 35px;
-  font-size: 15px; 
-  background-color: #87CEFA;
-  
-  text-transform: uppercase;
-  font-family: 'Open Sans Condensed';
-  font-weight: bolder;
-  border: none;
-  cursor: pointer;
-  display: flex;
-  justify-content: center;
-  margin-top: 20px;
-
-  &:hover {
-    background-color: #ADD8E6;
-    color: white;
-    border: 1px solid black;
-  }
-}
-
-.dashboard-display {
-  margin-left: 30px;
-  margin-top: 100px;
-  font-size: 20px;
-  color: white;
-  margin-bottom: 50px;
-}
-
-.lead {
-  margin-top: 50px;
-  font-size: 25px;
-  margin-left: 25px;
-}
-
-.form .form-group {
-  margin-top: 30px;
-  margin: 1.2rem 0;
-  padding-left: 20px;
-}
-
-.form .form-text {
-  display: block;
-  margin-top: 0.5rem;
-  color: #888;
-}
-
-.form input[type='text'],
-.form input[type='number'],
-.form input[type='email'],
-.form input[type='password'],
-.form input[type='date'],
-.form input[type='time'],
-.form select,
-.form textarea {
-  display: block;
-  width: 95%;
-  padding: 1rem;
-  font-size: 1.2rem;
-  border: 1px solid #ccc;
-  margin-bottom: 10px;
-  
-}
-
-.form-ticket {
-  width: 50%;
-  margin-top: 10px;
-}
-
-.form input[type='submit'],
-button {
-  font: inherit;
-}
-
-.form .social-input {
-  display: flex;
-}
-
-.checkout-page {
-  margin-left: 20px;
-  font-size: 25px;
-  margin-top: 100px;
-}
-
-.btn-back {
-  margin-left: 0px;
+.create-film-title {
+  margin-left: 2vw;
 }
 
 /* On hover, add a black background color with a little bit see-through 
@@ -910,7 +709,7 @@ button {
 }
 
 /* Fading animation */
-/*.fade {
+.fade {
   -webkit-animation-name: fade;
   -webkit-animation-duration: 1.5s;
   animation-name: fade;
@@ -926,9 +725,82 @@ button {
   from {opacity: .4}
   to {opacity: 1}
 }
+
+
+
+
+
+
+
+/*newer mediascreens*/
+@media (min-width:320px)  { /* smartphones, iPhone, portrait 480x320 phones */ 
+  /*body .film {
+    width: 9em;
+    margin-left: 0.5vw;
+    margin-right: 0.5vw;
+    padding: 1vw;
+  }*/
+
+
+}
+@media (min-width:481px)  { /* portrait e-readers (Nook/Kindle), smaller tablets @ 600 or @ 640 wide. */ 
+  /*body .film {
+    width: 12em;
+    margin-left: 0.5vw;
+    margin-right: 0.5vw;
+    padding: 1vw;
+  }*/
+
+
+}
+@media (min-width:641px)  { /* portrait tablets, portrait iPad, landscape e-readers, landscape 800x480 or 854x480 phones */ 
+  /*body .film {
+    width: 15em;
+    margin-left: 0.5vw;
+    margin-right: 0.5vw;
+    padding: 2vw;
+  }*/
+  /*body .all-screenings-title {
+    margin-left: 3vh;
+  }*/
+
+}
+
+@media (min-width:961px)  { /* tablet, landscape iPad, lo-res laptops ands desktops */ 
+  
+/*  body .film {
+    width: 14em;
+    margin-left: 0.5vw;
+    margin-right: 0.5vw;
+    padding: 1vw;
+}
+*/
+  /*body .all-screenings-title {
+    margin-left: 3vh;
+  }*/
+
+
+
+}
+
+@media (min-width:1025px) { /* big landscape tablets, laptops, and desktops */ 
+  /*body .film {
+    width: 14em;
+    margin-left: 0.3vw;
+    margin-right: 0.3vw;
+    padding: 1vw;
+  }
 */
 
+  /*body .all-screenings-title {
+    margin-left: 0vh;
+  }*/
+}
 
-
-
-
+@media (min-width:1281px) { 
+ /* body .all-screenings-title {
+  color: #864747;
+}
+*/
+  /* hi-res laptops and desktops */ 
+}

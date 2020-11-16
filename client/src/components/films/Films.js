@@ -7,6 +7,7 @@ import { connect } from 'react-redux';
 // import { loadFilms } from '../../actions/film';
 //import { loadFilms } from '../../actions/film';
 import Film from './Film';
+import './Films.scss';
 
 const Films = ({ 
 	// loadFilms,
@@ -16,11 +17,12 @@ const Films = ({
 	if (films === null) return null;
 	//console.log(films)
 	return (
-	<Fragment>
-    	
-        <section className="all-screenings">
-        	<h2 className="all-screenings-title">All our screenings</h2>
-        	<div className="films-list"> 
+		<Fragment>
+        	<div className="all-screenings">
+        	<div>
+	    		<h2 className="all-screenings-title">Latest films</h2>
+	    	</div>	
+	    	<div className="films-list">
 	    	{films.map(item => (
 				<Film
 				film={item}
@@ -28,10 +30,12 @@ const Films = ({
 	    		/>
           	))
            }
+            </div>
+           	<div className="view-all-link">
+           		<Link to='/film/dashboard'>View all >></Link>
+        	</div>    	
            </div>
-        </section>    	
-	
-      </Fragment>
+        </Fragment>    	
 	)
 }
 

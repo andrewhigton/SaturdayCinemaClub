@@ -37,7 +37,6 @@ router.get('/', auth, async (req, res) => {
 
     try {
        let user = await User.findOne({ email });
-
         if (!user) {
         return res
           .status(400)
@@ -65,10 +64,11 @@ router.get('/', auth, async (req, res) => {
         { expiresIn: 360000 },
         (err, token) => {
           if(err) throw err;
+          // console.log({token})
           res.json({ token })
         });
     } catch (err) {
-      console.error(err.message);
+      console.error('error?' + err.message);
       res.status(500).send('Server error');
     }
   }

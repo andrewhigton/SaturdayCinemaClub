@@ -10,8 +10,6 @@ const DashboardFilms = ({ films, user, loading }) => {
      loading && films === null ? <Spinner /> : 
           
         <Fragment>
-        
-        <h2 className="your-film-header">Your films</h2>
         <div className="your-films">
         {films.map(item => (
              item.user === user._id ?  
@@ -24,16 +22,10 @@ const DashboardFilms = ({ films, user, loading }) => {
              </div> : null
              ))}
         </div>
-         <Fragment>
-              <Link to='/create-film' className='btn'>
-                    Click to create a movie showing
-              </Link>
-  
         </Fragment>
-        
-        </Fragment>
-
     )
   }  
 
 export default DashboardFilms;
+
+// <h2 className="your-film-header">Your films</h2>

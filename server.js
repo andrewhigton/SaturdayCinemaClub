@@ -13,8 +13,6 @@ const app = express();
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-const PORT = process.env.PORT || 5000;
-
 connectDB();
 
 app.use(express.json({ extended: false }));
@@ -28,14 +26,27 @@ if (process.env.NODE_ENV === 'production') {
   });
 }
 
-app.listen(PORT, () => console.log(`Server started on ${PORT}`));
-
-app.get('/', (req, res) => res.send('API running'));
+// app.get('/', (req, res) => res.send('API running'));
 
 app.use('/api/users', require('./routes/api/users'));
 app.use('/api/auth', require('./routes/api/auth'))
-app.use('/api/profile', require('./routes/api/profile'))
+//app.use('/api/profile', require('./routes/api/profile'))
 app.use('/api/film', require('./routes/api/film'))
+//why use?
+
+
+//serve static assets in production
+const PORT = process.env.PORT || 5000;
+
+app.listen(PORT, () => console.log(`Server started on ${PORT}`));
+
+if(process.env.NODE_ENV === 'production') {
+  //set static folder
+  app.use(express.static('client/build'));
+  app.get('*', (req, res) => {
+    res.sendFile(path.resolve(__dirname), 'client', 'build', 'index.html')
+  })
+}
 
 app.post('/api/film/payment', (req, res) => {
   const body = {
@@ -50,13 +61,6 @@ app.post('/api/film/payment', (req, res) => {
     } else {
       return res.redirect('/');
       res.status(200).send({ success: stripeRes });
-      
-      //<Redirect to="/routes/api/film"/> 
     }
-    
-    //res.set('location', 'https://localhost:3000/');
-   //response.status(301).send()
-    //res.redirect('/routes/api/film');
-    //successRedirect : '/'
   });
 })

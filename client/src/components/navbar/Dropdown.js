@@ -1,17 +1,15 @@
 import React, { Fragment, useState } from 'react';
-import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { logout } from '../../actions/auth';
+// import Dropdown from 'react-bootstrap/Dropdown'
+
 import '../../App.scss';
 
-const Navbar = ({ auth: { isAuthenticated, loading }, logout }) => {
+const navDropdown = ({ auth: { isAuthenticated, loading }, logout }) => {
 	
-	const [ dropdownActive, setDropdownActive ] = useState(false);
 	
-	const authLinks = (
-		<ul className="loggedin navbar-right">
-	        
+		<ul className="loggedin navbar-right">	        
 	        <li className={`${dropdownActive ? "films-dropdown" : "films-tickets-link"}`}>
 		        <Link to='/film/dashboard'>
 		        <i/>{' '}
@@ -82,25 +80,21 @@ const Navbar = ({ auth: { isAuthenticated, loading }, logout }) => {
 	//then a drop down
 	//why doesn't it work on mobile? 
 	return (
+	  <div>
+		<Dropdown>
+		  <Dropdown.Toggle variant="success" id="dropdown-basic">
+		    Dropdown Button
+		  </Dropdown.Toggle>
 
-		<nav className="navbar">
-	      <div className="navbar-left">
-			<Link className="main-title" to="/">
-	        	<h1>Saturday Cinema Club</h1> 
-	        </Link>
-	      
-	      <h2 className="main-title-subdeck">
-	            Your favourite films on the big screen  
-	      </h2>
- 	      </div>
-
-	      {  (
-	      	<Fragment>{ isAuthenticated ? authLinks : guestLinks }</Fragment>
-	      	)}
-	     
-	    </nav>
-		);
-	};
+		  <Dropdown.Menu>
+		    <Dropdown.Item href="#/action-1">Action</Dropdown.Item>
+		    <Dropdown.Item href="#/action-2">Another action</Dropdown.Item>
+		    <Dropdown.Item href="#/action-3">Something else</Dropdown.Item>
+		  </Dropdown.Menu>
+		</Dropdown>
+	   </div>
+	);
+};
 
 Navbar.propTypes = {
 	logout: PropTypes.func.isRequired,
@@ -113,9 +107,30 @@ const mapStateToProps = state => ({
 
 export default connect(mapStateToProps, { logout })(Navbar);
 
-// <li>
-// 		        <Link to='/'>
-// 		        <i />{' '}
-// 		        <span>Film showings</span>
-// 		        </Link>
-// 	        </li>
+// <nav className="navbar">
+// 	      <div className="navbar-left">
+// 			<Link className="main-title" to="/">
+// 	        	<h1>Saturday Cinema Club</h1> 
+// 	        </Link>
+// 	      <h2 className="main-title-subdeck">
+// 	            Your favourite films on the big screen  
+// 	      </h2>
+//  	      </div>
+// 	      {(
+// 	      	<Fragment>{ isAuthenticated ? authLinks : guestLinks }</Fragment>
+// 	      )}
+// </nav>
+
+
+
+// <Dropdown>
+// 		  <Dropdown.Toggle variant="success" id="dropdown-basic">
+// 		    Dropdown Button
+// 		  </Dropdown.Toggle>
+
+// 		  <Dropdown.Menu>
+// 		    <Dropdown.Item href="#/action-1">Action</Dropdown.Item>
+// 		    <Dropdown.Item href="#/action-2">Another action</Dropdown.Item>
+// 		    <Dropdown.Item href="#/action-3">Something else</Dropdown.Item>
+// 		  </Dropdown.Menu>
+// 		</Dropdown>

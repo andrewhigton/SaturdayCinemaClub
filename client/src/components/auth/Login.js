@@ -3,6 +3,7 @@ import { Link, Redirect } from 'react-router-dom'
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { login } from '../../actions/auth';
+import './auth.scss';
 
 const Login = ( { login, isAuthenticated } ) => {
 	const  [formData, setFormData] = useState({
@@ -29,7 +30,6 @@ const Login = ( { login, isAuthenticated } ) => {
 		}
 
 return <Fragment>
-			<h1 className="large text-primary">Sign In</h1>
 		      <p className="lead">Sign in to your account</p>
 		      <form className="form" action="create-profile.html" onSubmit={e => onSubmit(e)}>
 		        <div className="form-group">
@@ -52,7 +52,7 @@ return <Fragment>
 		        </div>
 		        <input type="submit" className="btn btn-primary" value="Login" />
 		      </form>
-		      <p className="no-account">
+		      <p className="lead">
 		        Don't have an account? <Link className="reg" to="/register">Sign Up</Link>
 		      </p>
 		   </Fragment>

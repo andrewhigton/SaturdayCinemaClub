@@ -9,14 +9,13 @@ const DashboardTickets = ({ user, loading }) => {
      loading && user === null ? <Spinner /> : 
         <Fragment>
         <div className="">
-        <h1 className='large text-primary'>Welcome {user && user.name}</h1>
 
         </div>  
         
         {user.tickets.length === 0 ? 
           (
          <Fragment >  
-         <h2>Your tickets</h2>
+         <h1 className='welcome-message'>Your tickets</h1>
               <p>You haven't bought any tickets yet</p>
           <Link  to="/">
             <p className="films-link">Search films</p> 
@@ -25,7 +24,6 @@ const DashboardTickets = ({ user, loading }) => {
           ) :
           (   
         <Fragment>
-        <h2>Your tickets</h2>
         <div className="your-tickets">{user.tickets.map(item => (         
              <div 
              className="singleTicket"

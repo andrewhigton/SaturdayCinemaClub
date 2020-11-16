@@ -5,8 +5,9 @@ import PropTypes from 'prop-types';
 import Spinner from '../layout/Spinner';
 import Films from '../films/Films';
 import Film from '../films/Films';
+import Footer from '../footer/Footer';
 import { loadFilms } from '../../actions/film';
-import Carousel from '../carousel/Carousel';
+import FilmCarousel from '../carousel/Carousel';
 
 const Landing = ({ 
 	isAuthenticated, 
@@ -20,16 +21,16 @@ const Landing = ({
 	// if (isAuthenticated) {
  //    return <Redirect to='/film/dashboard'/>;
  //  	}
-  	
+  	//console.log(films)
 	return (
-		<section className="landing dark-overlay">
+		<section>
 	      <div className="carousel">
-		    <Carousel film={films}/>	          
+		    <FilmCarousel/>	          
 	       </div>
-	       <div>
+	       <div >
 			<Films/>	       	
 	       </div>
-
+	       <Footer/>
 	    </section>
 		)
 	}
@@ -46,3 +47,16 @@ const mapStateToProps = state => ({
 });
 
 export default connect(mapStateToProps, { loadFilms })(Landing);
+
+
+// return (
+// 		<section className="landing dark-overlay">
+// 	      <div className="carousel">
+// 		    <filmCarousel/>	          
+// 	       </div>
+// 	       <div>
+// 			<Films/>	       	
+// 	       </div>
+
+// 	    </section>
+// 		)

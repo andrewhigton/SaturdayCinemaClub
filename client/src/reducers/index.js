@@ -8,7 +8,7 @@ import film from './film';
 const persistConfig = {
 	key: 'root',
 	storage,
-	whitelist: ['auth', 'film', 'profile']
+	whitelist: ['auth', 'film']
 
 }
 

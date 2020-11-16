@@ -3,6 +3,7 @@ import { Link, withRouter, Redirect } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { createFilm } from '../../actions/film';
+import './createfilm.scss';
 	
 const CreateFilm = ({
 	createFilm,
@@ -42,10 +43,8 @@ const CreateFilm = ({
 	
 	return (
 		<Fragment>
-			<h1>Create a film request</h1>
+			<h1 className='create-film-title'>Create a film screening</h1>
 			
-			<small>* = required field</small>
-				
 			<form className='form' onSubmit={e => onSubmit(e)}>
 				<div className='form-group'>
 					<p>Film</p>
@@ -100,7 +99,7 @@ const CreateFilm = ({
 				
 
 				<input type='submit' className='btn btn-primary my-1' />
-				<Link className='btn btn-light my-1' to='/film/dashboard'>
+				<Link className='btn-back btn btn-light my-1' to='/film/dashboard'>
 					Go Back
 				</Link>
 			</form>
