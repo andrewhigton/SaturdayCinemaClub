@@ -1,5 +1,5 @@
-import React, { useEffect, useState, Fragment } from 'react';
-import { Link, withRouter, Redirect } from 'react-router-dom';
+import React, { useState, Fragment } from 'react';
+import { Link, withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { createFilm } from '../../actions/film';
@@ -11,7 +11,6 @@ const CreateFilm = ({
 }) => {
 
 	const [formData, setFormData] = useState({
-		user: '',
 		title: '',
 		date: '',
 		filmtime: '15:00',
@@ -22,10 +21,7 @@ const CreateFilm = ({
 		totalsoFar: 56,
 	});
 
-
-	const [displaySocialInputs, toggleSocialInputs] = useState(false);
 	const {
-		user,
 		title,
 		cinema,
 		date,

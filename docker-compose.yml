@@ -1,0 +1,38 @@
+version: "3"
+services:
+
+# backend api    
+ sat-cinema-club:
+  container_name: backend
+  build: ./
+  command: npm start
+  working_dir: /usr/src/sat-cinema-club
+  # environment: 
+  links:
+   - mongo
+  ports:
+   - "5000:5000"
+  volumes: 
+   - ./:/usr/src/sat-cinema-club
+ # db
+ mongo:
+  container_name: mongo
+  image: mongo 
+  ports: 
+   - "27017:27017"
+
+# frontend
+ # frontend:
+ #  container_name: app
+ #  build: ./client
+ #  # working_dir: /client
+ #  # dockerfile: Dockerfile
+ #  image: app
+ #  links: 
+ #   - sat-cine-club
+ #   - mongo
+  # ports:
+  #  - "3000:3000"
+  # volumes:
+  #  - ./client:/usr/src/app
+

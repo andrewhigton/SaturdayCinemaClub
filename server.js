@@ -2,6 +2,7 @@ const express = require('express');
 const connectDB = require('./config/db')
 const bodyParser = require('body-parser');
 const path = require('path');
+const morgan = require('morgan');
 const cors = require('cors');
 
 if (process.env.NODE_ENV !== 'production') require('dotenv').config();
@@ -15,7 +16,11 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 connectDB();
 
+app.get('/', (req, res) => { res.send("its working") });
+console.log('change');
+
 app.use(express.json({ extended: false }));
+app.use(morgan('combined'));
 app.use(cors());
 
 if (process.env.NODE_ENV === 'production') {
@@ -26,14 +31,9 @@ if (process.env.NODE_ENV === 'production') {
   });
 }
 
-// app.get('/', (req, res) => res.send('API running'));
-
 app.use('/api/users', require('./routes/api/users'));
 app.use('/api/auth', require('./routes/api/auth'))
-//app.use('/api/profile', require('./routes/api/profile'))
 app.use('/api/film', require('./routes/api/film'))
-//why use?
-
 
 //serve static assets in production
 const PORT = process.env.PORT || 5000;

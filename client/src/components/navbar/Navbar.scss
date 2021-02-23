@@ -2,8 +2,6 @@
     height: 100px;
     font-family: 'Limelight', cursive;
     margin-top: 1vh;
-    /*margin-left: 6vw;*/
-    /*color: #864747 ;*/
   }
 
 .navbar-left {
@@ -13,9 +11,7 @@
 }
 
 .navbar-right {
-  /*font-size: 1.2em;*/
   margin-top: 4vh;
-  /*display: inline-flex;*/;
   font-size: 1.2em;
   font-family: 'Raleway', sans-serif;
 }
@@ -29,11 +25,6 @@
 .navbar a {
   padding: 0.45rem;
   margin: 0 0.25rem;
-  /*font-size: 19px;*/
-}
-
-.navbar a:hover {
-  /*color: var(--primary-color);*/
 }
 
 .main-title { 
@@ -45,8 +36,6 @@
   font-size: 1.6em;
   margin-top: -50px;
   }
-
-
 
 a  {
   color: #864747 !important;
@@ -80,10 +69,6 @@ a  {
   margin-right: -1.5vw;
   }
 
-.login {
-  /*margin-right: 15vw;*/
-  }
-  
 .howitworks {
     margin-top: -7.7vh;
     margin-left: 1vw;
@@ -133,12 +118,6 @@ margin-top: -7.7vh;
     display: flex;
     }
   
-/*  .reg-dropdown, .log-dropdown, .how-dropdown, .buy-dropdown {
-  display: inline-flex;
-  top: 3px;
-  font-size: 3em;
-  }
-*/  
   .reg-dropdown {
   margin-left: 1vw;
   margin-right: 0.5em;
@@ -170,7 +149,6 @@ margin-top: -7.7vh;
   position: absolute;
   left: 105px;
   top: 72px;
-  /*color: white;*/
   text-align: left;
   z-index: 2;  
   }
@@ -192,7 +170,7 @@ margin-top: -7.7vh;
 
   .logged-in-nav {
     font-family: 'Raleway', sans-serif;
-    /*margin-top: -1vh;*/
+    margin-top: 1vh;
     font-size: 1.2em;
   }
 
@@ -205,30 +183,16 @@ margin-top: -7.7vh;
     margin-top: 0px;
   }
 
-  .how-auth-dropdown {
+.how-auth-dropdown {
     margin-top: -1.6em;
     margin-left: 4em;
   }
 
-  .how-loggedin {
+.how-loggedin {
     margin-top: -2em;
-    /*margin-left: 4em;*/
   }
-
 
 .hamburgDiv-loggedin {
   display: none;
-  margin-top: -5.5vh;
+  margin-top: -6vh;
 }
-
-/*.navbar {
-  display: inline;  
-  height: 100px;
-  padding: 0.7rem 2rem;
-  position: fixed;
-  top: 0; 
-  width: 100%;
-  border-bottom: solid 1px var(--primary-color);
-  z-index: 3;
-}
-*/

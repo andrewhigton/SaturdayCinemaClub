@@ -1,27 +1,17 @@
-import React, { useState, Fragment } from 'react';
+import React, { useState } from 'react';
 import { connect } from 'react-redux';
-import { useParams} from 'react-router';
-import { useSelector, useDispatch } from 'react-redux';
-import { Link, withRouter, Redirect } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
 import StripeCheckoutButton from '../../components/stripe-button/stripe-button';
 import PropTypes from 'prop-types';
 import { updateUserTickets } from '../../actions/auth';
 import './checkoutfilm.scss'
-// import { updateFilm } from '../../actions/film';;
-
-//import './checkout-item.styles.scss';
 
 const CheckoutFilm = ({ 
   film: {film, loading}, 
   match, 
-  // getFilmById, 
-  // updateFilm, 
   updateUserTickets,
   history }) => {
-  // let bookingTotal = 0;
-  //console.log(match)
-  //console.log(film)
-  //console.log('checkoutpage')
+
   const [filmData, setFilmData] = useState({
     _id: film._id,
     user: film.user,
@@ -67,7 +57,6 @@ const CheckoutFilm = ({
      numberOfTickets: ticketsTotal });
   } 
 
-  // if (film === null) return null;
   return (
       <>
       <div className='checkout-page'>
@@ -100,7 +89,10 @@ const CheckoutFilm = ({
           </div>  
         </form>
           <div>
-            <span>Basket total: £{bookingCost}</span>
+            <span>Basket total: £{
+              isNaN(bookingCost) ? 0 
+              : bookingCost}
+            </span>
           </div>
           <div>
             <span> 

@@ -1,5 +1,4 @@
 import React from 'react';
-import { Link, Redirect } from 'react-router-dom';
 import Footer from '../footer/Footer';
 import '../../App.scss';
 import './howitworks.scss';
@@ -9,13 +8,19 @@ const HowItWorks = () => {
 	return (
 		<section className="landing dark-overlay">
 	      <div className="how-it-works">
-				<h1>Saturday Cinema Club</h1>
 				<h2>How crowdfunded cinema works</h2>
-				<p>
-				ourscreen allows film fans to watch the films they love at their local cinema, whether that’s a cult classic, foreign thriller or modern masterpiece.
-Fans can start by creating their own screening, or by booking tickets to screenings hosted by others. Our crowdsourced model means that as long as enough people book tickets, the screening will go ahead.
-For first-time hosts or first-time ticket buyers, this page is designed to help you navigate the waters to creating a screening and booking a ticket. Our hosts held over 500 screenings last year, but it always helps to have Hooper driving the boat.
-				</p>
+					<li>Buying for a screening someone has created</li>
+					<p></p>
+					<p>1) Browse our films, find one near you, book your tickets</p>
+					<p>2) Once the required number of tickets are sold, the screening is confirmed and your card will be charged</p>
+					<li>Create your own screening</li>
+					<p></p>
+					<p>1) Book the film, date, time and place </p>
+					<p>2) Buy your tickets </p>
+					<p>3) Invite all your friends, advertise on Facebook etc.</p>
+					<p>4) Once the screening reaches the required number of tickets, the screening is confirmed</p>
+					<p></p>
+					<p></p>
 	       </div>
 	    <Footer />
 	    </section>

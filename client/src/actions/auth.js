@@ -5,14 +5,10 @@ import {
   REGISTER_FAIL,
   USER_LOADED,
   USER_ERROR,
-  // AUTH_ERROR,
   UPDATE_USER,
   LOGIN_SUCCESS,
   LOGIN_FAIL,
   LOGOUT,
-  // CLEAR_PROFILE,
-  // GET_FILM,
-  // FILM_ERROR
 } from './types';
 
 import setAuthToken from '../utils/setAuthToken';
@@ -25,7 +21,6 @@ export const loadUser = () => async dispatch => {
   
   try {
     const res = await axios.get('/api/auth');
-    // console.log(res);  
     dispatch({
       type: USER_LOADED,
       payload: res.data
@@ -54,8 +49,7 @@ export const register = ({ name, email, password }) => async dispatch => {
       payload: res.data
     });
     dispatch(loadUser());
-    // dispatch(createProfile());
-  } catch (err) {
+    } catch (err) {
     const errors = err.response.data.errors;
 
     if (errors) {
@@ -80,25 +74,17 @@ export const login = (email, password) => async dispatch => {
   
   try {
     const res = await axios.post('/api/auth', body, config);
-    // console.log(res.data)
-    // console.log('calling loaduser')
     
     dispatch({
       type: LOGIN_SUCCESS,
       payload: res.data
     });
-    
-
-    //this isn't being called
-    //because try is throwing an exception. what is it?
-    dispatch(loadUser());
+     dispatch(loadUser());
     
   } 
   catch (err) {
     console.log(err)
     const errors = err.response.data.errors;
-    //check this next
-    // console.log(errors)
     if (errors) {
       errors.forEach(error => dispatch(setAlert(error.msg, 'danger')));
     }
@@ -109,8 +95,6 @@ export const login = (email, password) => async dispatch => {
   }
 
 };
-
-
 
 // Add Tickets
 export const updateUserTickets = (formData, history) => async dispatch => {
@@ -126,13 +110,9 @@ export const updateUserTickets = (formData, history) => async dispatch => {
       type: UPDATE_USER,
       payload: res.data
     });
-    //also need to do this after payment has completed
-    //dispatch(setAlert('Tickets Added', 'success'));
     //history.push('/film/dashboard');
   } catch (err) {
-    //console.log('error')
     const errors = err.response.data.errors;
-
     if (errors) {
       errors.forEach(error => dispatch(setAlert(error.msg, 'danger')));
     }
@@ -161,8 +141,7 @@ export const deleteTickets = id => async dispatch => {
   }
 };
 
-//Logout / Clear Profile
+//Logout
 export const logout = () => dispatch => {
-  // dispatch({ type: CLEAR_PROFILE });
   dispatch({ type: LOGOUT });
 };

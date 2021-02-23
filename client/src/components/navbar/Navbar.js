@@ -23,7 +23,7 @@ const Navbar = ({ auth: { isAuthenticated, loading }, logout, params }) => {
 		        </Link>
 	        </li>
 	        <li className={`${dropdownActive ? "buytickets-dropdown" : "buy-tickets-link"}`}>
-		        <Link to='/film/dashboard'>
+		        <Link to='/film'>
 		        All films
 		        </Link>
 	        </li>
@@ -67,8 +67,8 @@ const Navbar = ({ auth: { isAuthenticated, loading }, logout, params }) => {
 	    	    <Link to="/login">/ Login</Link>
 	        </li>
 	        <li className={`${dropdownActive ? "buy-dropdown" : "buytickets-loggedout"}`}>
-		        <Link to='/film/dashboard'>
-		        Buy tickets
+		        <Link to='/film'>
+		        All films
 		        </Link>
 	        </li>
 	        <li className={`${dropdownActive ? "how-dropdown" : "howitworks"}`}>

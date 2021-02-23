@@ -8,22 +8,17 @@
 
 * {
   box-sizing: border-box;
-  /*margin: 0;*/
   padding: 0;
-  /*width: 102vw;*/
   max-width: 102vw;  
 }
 
 body {
   font-family: 'Raleway', sans-serif;
-  /*font-size: 5em;*/
   line-height: 1.6;
   background-color: #fff;
   color:white;
   background-color: rgba(0, 0, 0, 0.4);
   max-width: 97%;
-  /*position: relative;*/
-  /*width: 100%;*/
   height: 100%;
   -webkit-text-size-adjust: none;
   overflow-x: hidden;
@@ -33,68 +28,20 @@ a {
   color: #864747;
 }
 
-h1 {
-  /*font-size: 1em;*/
-  /*display: flex;
-  flex-wrap: wrap;*/
-}
-
-/*.arrows {
-  position: absolute;
-  z-index: 2;
-  font-size: 35px;
-  margin: auto;
-  text-align: center;
-  color: white;
-  top: 550px;
-  width: 200px;
-  height: 200px;
-  display: inline-flex;
-  position: relative;
-  left: 600px;
-}
-
-.slide-arrow-prev {  
-  margin-right: 70px;
-}
-*/
-
-/*.image-slide {
-    width: 100%;
-    position: absolute;
-    top: -80px;
-    left: 0px;
-    height: 780px;
-    padding: 0.7rem 2rem;
-    z-index: 0;
-}
-*/
-
-
-
-/*.inset-text {
-  font-family: 'Raleway', sans-serif;
-  position: absolute;
-  font-size: 2em;
-  color: white;
-  left: 30px;
-  top: 575px;
-}*/
-
-/*xy*/
-
 .welcome-message {
   font-size: 1.7em;
-  margin-left: 15px;
-  margin-bottom: 2vh; 
+  margin-left: 30px;
+  margin-bottom: 30px; 
   font-family: 'Raleway', sans-serif;
 }
 
-
-/*//older media queires*/
 @media screen and (max-width: 1200px) {  
   body .inset-text {
   top: 530px;
+  }
+
+  ._3 {
+    display: none;
   }
   
   .hamburgerDiv {
@@ -111,13 +58,7 @@ h1 {
   }
 }
 
-
-
 @media screen and (max-width: 1100px) {  
-
-body .all-screenings {
-    /*margin-top: 520px;*/
-  }
 
   .top-row {
   display: none
@@ -134,14 +75,12 @@ body .all-screenings {
     top: 6vh;
     margin-left: -1vw;
     margin-top: 0vh;
-    /*box-shadow: 0px 8px 0px 0px #864747;*/
     z-index: 1;
-    /*height: 5vh;*/
   }
   
   .hamburgerDiv {
   display: block;
-  margin-top: -7vh;
+  margin-top: -4.5vh;
   }
 
   .hamburgDiv-loggedin {
@@ -150,11 +89,22 @@ body .all-screenings {
 
 }
 
+@media screen and (max-width: 1058px) {  
+  
+  ._3 {
+    display: block;
+  }
+}
+
 @media screen and (max-width: 999px) {  
   
   body .inset-text {
     font-size: 15px;
     top: 510px;
+  }
+
+  .carousel {
+    max-height: 400px !important;
   }
 }
 
@@ -171,10 +121,6 @@ body .all-screenings {
   left: 340px;
   }
 
-   body .all-screenings {
-    /*margin-top: 440px;*/
-  }
-
   .reg-dropdown {
     margin-left: 0.5vw;
   }
@@ -183,26 +129,17 @@ body .all-screenings {
 
 @media screen and (max-width: 770px) {  
   
- /*.navbar {
-    float: none;
-    width: 100%;
-  }
- */ 
   body .inset-text {
   font-size: 15px;
   top: 440px;
   }
 
-  body h1 {
-    /*font-size: 32px;*/
-  }
-
-  .all-screenings {
-  /*max-width: 770px;*/
-  }
-
   .register, .login, .howitworks {
     display: none;
+  }
+
+  .hamburgDiv-loggedin { 
+    margin-top: -4.5vh;
   }
 
   .reg-dropdown {
@@ -213,14 +150,13 @@ body .all-screenings {
     display: none;
   }
 
-  /**/
   body .image-slide {
     top: -150px; 
   }
-  
-  body .all-screenings {
-    /*margin-top: 370px;*/
-  }
+
+  .navbar-left {
+    margin-top: -45px;
+}
 
 }
 
@@ -229,9 +165,9 @@ body .image-slide {
     top: -180px; 
   }
   
-body .all-screenings {
-    /*margin-top: 300px;*/
-    }
+body .hamburgerDiv {
+    margin-top: -11vh;
+  }
 
 body .inset-text {
   font-size: 15px;
@@ -254,10 +190,6 @@ body h1 {
   top: 410px;
   }
 
-  body .all-screenings {
-    /*margin-top: 220px;*/
-  }
- 
   body .navbar {
     height: 3vh;
     margin-top: 30px;
@@ -280,16 +212,12 @@ body h1 {
     display: none;
   }
   
-  body .image-slide {
-    top: -220px; 
-  }
-
-  body .hamburgerDiv {
-    margin-top: -11vh;
+  .carousel {
+    max-height: 230px !important;
   }
 
   .hamburgDiv-loggedin {
-    margin-top: -7vh;
+    margin-top: -7.2vh;
   }
 
   .hamburger { 
@@ -314,6 +242,15 @@ body h1 {
     font-size: 0.8em;
     margin-right: 0.1vw;
   }
+  
+  .welcome-message {
+  margin-top: 15px;
+}
+  
+  .carousel {
+    margin-top: 1.7vh;
+    max-height: 190px !important;
+  }
 }
 
 @media screen and (max-width: 410px) {  
@@ -324,7 +261,6 @@ body h1 {
 }
 
   body .all-screenings {
-  /*margin-top: 160px;*/
   }
 
  .navbar {
@@ -341,31 +277,26 @@ body h1 {
   }
 
   body .hamburgerDiv { 
-    margin-top: -10vh;
+    margin-top: -8vh;
     margin-right: -3.5em;
     }
 
   body .hamburgDiv-loggedin {
-    margin-top: -9.5vh;
+    margin-top: -12vh;
     margin-left: 80vw;
   }
 
 
   body h1 {
   font-size: 0.7em;
-  margin-top: -1.2vh;
+  margin-top: 1.2vh;
   }
 
   .dropdown {
-    top: 0vh;
+    margin-top: 7px;
     font-size: 0.6em;
-/*    height: 3vh;*/
   }
 
-/*  .how-auth-dropdown, .logout-dropdown, .films-dropdown {
-    font-size: 15px; 
-  }
-*/
   body .films-dropdown {
     left: 18px;
     top: 30px; 
@@ -380,33 +311,43 @@ body h1 {
     display: none;
   }
   
-  /*.reg-dropdown, .log-dropdown, .how-dropdown {
-  font-size: 5px; 
-  }
-  */
-  /*.reg-dropdown { 
-  top: 30px;
-  }*/
-  
 .log-dropdown {
     margin-left: -1.4em;
-}
+  }
  
- /* .how-dropdown {
-  top: 30px;
-  left: 130px;
-  }*/
-  
   body .image-slide {
     top: -250px; 
   }
 
+  .carousel {
+    max-height: 190px !important;
+  }
+
+
 }
 
 @media screen and (max-width: 362px) {  
+
+.dark-overlay {
+  margin-top: 30px;
+}
+
 body .inset-text {
   left: 16px;
   top: 400px;
+}
+
+.film {
+    margin-left: -5px !important;
+}
+
+.films-list {
+  border: 0px #864747 solid !important; 
+}
+
+.singleTicket {
+  margin-left: -12px !important;
+
 }
 
 .reg-dropdown {
@@ -416,14 +357,6 @@ body .inset-text {
 .log-dropdown, .buy-dropdown, .how-dropdown, .buytickets-dropdown {
     margin-right: -5vw;
 }
-
-body .all-screenings {
-  /*margin-top: 110px;*/
-  }
-
-/*body .all-screenings-title {
-  font-size: 25px;
-}*/
 
 .navbar {
     height: 2vh;
@@ -455,10 +388,10 @@ body .hamburgerDiv {
     margin-right: -3em;
   }
 
-body .hamburgDiv-loggedin {
-    margin-top: -9.5vh;
-    margin-left: 80vw;
+.hamburgDiv-loggedin { 
+    margin-top: -13.5vh !important;
 }
+
 
 .hamburger { 
     width: 22px;
@@ -469,7 +402,6 @@ body .hamburgDiv-loggedin {
 .dropdown {
     margin-right: 0vw;
   }
-
 }
 
 @media screen and (max-width: 335px) {  
@@ -477,18 +409,6 @@ body .inset-text {
   left: 16px;
   font-size: 8px;
   top: 400px;
-}
-
-/*body .hamburgerDiv {
-    margin-top: 1px
-  }*/
-
-body .all-screenings {
-  /*margin-top: 110px;*/
-  }
-
-body .all-screenings-title {
-  /*font-size: 25px;*/
 }
 
  .navbar {
@@ -518,25 +438,21 @@ body .all-screenings-title {
   .dropdown {
     font-size: 0.6em;
   }
-
-  .hamburgDiv-loggedin {
-    margin-top: -8.7vh;
-    margin-left: 12vw;
+  .film {
+    margin-right: -2vw;
   }
 
+  .carousel {
+    max-height: 150px !important;
+  }
+  
 }
 
 @media screen and (max-width: 290px) {  
  body .inset-text {
   left: 14px;
-  /*font-size: 8px;*/
   top: 390px;
 }
-
-.all-screenings {
-  /*margin-top: 70px;*/
-  }
-
 
  .navbar {
     max-height: 30px;
@@ -561,7 +477,7 @@ body .all-screenings-title {
   }
 
   body .hamburgerDiv {
-    margin-top: -12vh;
+    margin-top: -19vh;
     margin-right: -2.5em;
   }
 }
@@ -584,14 +500,6 @@ body .all-screenings-title {
 .films-link {
   font-size: 22px;
 }
-
-
-
-/*.img {
-  height: 100px;
-  width: 100%;
-}*/
-
 
 .landing-page-titles {
   color: #fff;  
@@ -660,147 +568,11 @@ img {
   user-select: none;
 }
 
-/*//from here*/
-
 .next {
   right: 0;
   border-radius: 3px 0 0 3px;
 }
 
-.dark-overlay {
-/*  background-color: rgba(0, 0, 0, 0.7);
-  position: relative;
-  top: 50px;
-  left: 0;
-  width: 100%;
-  height: 1000px;
-  margin-top: -100px;
-*/  
-}
-
-.dashboard-display {  
-  display: inline-flex;
-  flex-wrap: wrap;
-  margin-top: -2vh;
-}
-
 .create-film-title {
   margin-left: 2vw;
-}
-
-/* On hover, add a black background color with a little bit see-through 
-.prev:hover, .next:hover {
-  background-color: rgba(0,0,0,0.8);
-}
-
-.dot {
-  cursor: pointer;
-  height: 15px;
-  width: 15px;
-  margin: 0 2px;
-  background-color: #bbb;
-  border-radius: 50%;
-  display: inline-block;
-  transition: background-color 0.6s ease;
-}
-
-.active, .dot:hover {
-  background-color: #717171;
-}
-
-/* Fading animation */
-.fade {
-  -webkit-animation-name: fade;
-  -webkit-animation-duration: 1.5s;
-  animation-name: fade;
-  animation-duration: 1.5s;
-}
-
-@-webkit-keyframes fade {
-  from {opacity: .4}
-  to {opacity: 1}
-}
-
-@keyframes fade {
-  from {opacity: .4}
-  to {opacity: 1}
-}
-
-
-
-
-
-
-
-/*newer mediascreens*/
-@media (min-width:320px)  { /* smartphones, iPhone, portrait 480x320 phones */ 
-  /*body .film {
-    width: 9em;
-    margin-left: 0.5vw;
-    margin-right: 0.5vw;
-    padding: 1vw;
-  }*/
-
-
-}
-@media (min-width:481px)  { /* portrait e-readers (Nook/Kindle), smaller tablets @ 600 or @ 640 wide. */ 
-  /*body .film {
-    width: 12em;
-    margin-left: 0.5vw;
-    margin-right: 0.5vw;
-    padding: 1vw;
-  }*/
-
-
-}
-@media (min-width:641px)  { /* portrait tablets, portrait iPad, landscape e-readers, landscape 800x480 or 854x480 phones */ 
-  /*body .film {
-    width: 15em;
-    margin-left: 0.5vw;
-    margin-right: 0.5vw;
-    padding: 2vw;
-  }*/
-  /*body .all-screenings-title {
-    margin-left: 3vh;
-  }*/
-
-}
-
-@media (min-width:961px)  { /* tablet, landscape iPad, lo-res laptops ands desktops */ 
-  
-/*  body .film {
-    width: 14em;
-    margin-left: 0.5vw;
-    margin-right: 0.5vw;
-    padding: 1vw;
-}
-*/
-  /*body .all-screenings-title {
-    margin-left: 3vh;
-  }*/
-
-
-
-}
-
-@media (min-width:1025px) { /* big landscape tablets, laptops, and desktops */ 
-  /*body .film {
-    width: 14em;
-    margin-left: 0.3vw;
-    margin-right: 0.3vw;
-    padding: 1vw;
-  }
-*/
-
-  /*body .all-screenings-title {
-    margin-left: 0vh;
-  }*/
-}
-
-@media (min-width:1281px) { 
- /* body .all-screenings-title {
-  color: #864747;
-}
-*/
-  /* hi-res laptops and desktops */ 
 }

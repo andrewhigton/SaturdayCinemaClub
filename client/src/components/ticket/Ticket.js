@@ -1,10 +1,9 @@
 import React from 'react';
 import './Tickets.scss';
-
+import '../../App.scss'
 
 const Ticket = ({ ticket }) => {
 const { title, 
-		ticketPrice, 
 		numberOfTickets,
 		date,
 		cost, 
@@ -18,7 +17,7 @@ const { title,
         <article className="ticket">
 		  <header className="ticket__wrapper">
 		    <div className="ticket__header">
-		    	<img src="/cine-ticket.jpeg" className="ticket-stub"/>
+		    	<img src="/cine-ticket.jpeg" alt='' className="ticket-stub"/>
 		  	</div>
 		  </header>
 		  <div className="ticket__divider">

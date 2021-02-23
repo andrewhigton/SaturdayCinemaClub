@@ -3,8 +3,7 @@ import {
   UPDATE_FILM,
   GET_FILMS,
   FILM_ERROR,
-  CLEAR_FILM,
-  DELETE_FILM
+  CLEAR_FILM
 } from '../actions/types';
 
 const initialState = {
@@ -18,7 +17,6 @@ export default function(state = initialState, action) {
          const { type, payload } = action 
         switch (type) {
           case GET_FILM:
-          // case UPDATE_FILM:
           return {
             ...state,
             film: payload,

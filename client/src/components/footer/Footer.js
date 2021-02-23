@@ -1,20 +1,20 @@
 import React from 'react';
-import { Link, Redirect } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import './Footer.scss';
 
 const Footer = () => {
         return (
             <div className="footer">
                 <div className="footer-link">
-                    <a className="contacts-link">About Saturday Cinema Club</a>
+                    <Link className="contacts-link">About Saturday Cinema Club</Link>
                     <Link to='/howitworks' className="contacts-link">How it works</Link>
-                    <a className="contacts-link">Contact us</a>
+                    <Link className="contacts-link">Contact us</Link>
                 </div>
                 <div className="social-links">
-                    <a href="facebook.com" class="fa fa-facebook"></a>
-    				<a href="twitter.com" class="fa fa-twitter"></a>		
-    				<a href="youtube.com" class="fa fa-youtube"></a>		
-    				<a href="instagram.com" class="fa fa-instagram"></a>		
+                    <a href="https://www.facebook.com/" className="fa fa-facebook"><i class="fblink"></i></a>
+    				<a href="https://twitter.com/home" className="fa fa-twitter"><i class="fblink"></i></a>		
+    				<a href="https://www.youtube.com/" className="fa fa-youtube"><i class="fblink"></i></a>		
+    				<a href="https://www.instagram.com/?hl=en" className="fa fa-instagram"><i class="fblink"></i></a>		
                 </div>
             </div>
         );

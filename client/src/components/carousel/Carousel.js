@@ -1,4 +1,3 @@
-//import React, { Fragment, useState, useEffect, useRef } from 'react';
 import React, { useState } from 'react';
 import {
   Carousel,
@@ -7,47 +6,39 @@ import {
   CarouselIndicators,
   CarouselCaption
 } from 'reactstrap';
-// import Carousel from 'react-bootstrap/Carousel'
-
-// import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
-// import ImageSlide from './ImageSlide';
-// import Spinner from '../layout/Spinner';
-// import Arrow from './Arrow'; 
-//import '../../App.scss';
 import './carousel.scss';
 
 const items = [
   {
-    src: 'https://i1.wp.com/www.thepankou.com/wp-content/uploads/2017/02/Qipao-12-final-Orange-flower-2.jpg',
+    src: 'mood.jpg',
     altText: 'In The Mood For Love',
     caption: 'In The Mood For Love',
     location: 'Picturehouse Liverpool, May 20 2021'
   },
   {
-    src: 'https://images2.alphacoders.com/870/thumb-1920-870886.jpg',
+    src: 'br2049.jpeg',
     altText: 'Blade Runner 2049',
     caption: 'Blade Runner 2049',
     location: 'Curzon Bloomsbury London, Dec 5 2020'
   },
   {
-    src: 'https://vistapointe.net/images/spinal-tap-7.jpg',
+    src: 'spinal.jpeg',
     altText: 'Spinal Tap',
     caption: 'Spinal Tap',
     location: 'Genesis Cinema, London, Jan 2 2021'
   },
-  {
-    src: 'https://cdn.hipwallpaper.com/i/63/10/rRPDQ9.png',
-    altText: 'The Thin Red Line',
-    caption: 'The Thin Red Line',
-    location: 'Chester Storyhouse , Nov 4 2020'
-  },
-    {
-    src: 'https://wallup.net/wp-content/uploads/2017/03/29/476520-HAL_9000-movies-2001_A_Space_Odyssey.jpg',
-    altText: '2001: A Space Odyssey',
-    caption: '2001: A Space Odyssey',
-    location: 'Picturehouse Bristol, Apr 3 2021'
-  }
+  // {
+  //   src: 'thinred.png',
+  //   altText: 'The Thin Red Line',
+  //   caption: 'The Thin Red Line',
+  //   location: 'Chester Storyhouse , Nov 4 2020'
+  // },
+  //   {
+  //   src: 'odyssey.jpeg',
+  //   altText: '2001: A Space Odyssey',
+  //   caption: '2001: A Space Odyssey',
+  //   location: 'Picturehouse Bristol, Apr 3 2021'
+  // }
 
 
 
@@ -83,7 +74,11 @@ const FilmCarousel = (props) => {
         onExited={() => setAnimating(false)}
         key={item.src}
       >
-        <img className="img-slide" src={item.src} alt={item.altText} />
+        <img 
+        className="img-slide" 
+        src={item.src} 
+        alt={item.altText} 
+        />
         <CarouselCaption 
         className="carousel"
         captionText={item.location} 
@@ -100,7 +95,11 @@ const FilmCarousel = (props) => {
       next={next}
       previous={previous}
     >
-      <CarouselIndicators items={items} activeIndex={activeIndex} onClickHandler={goToIndex} />
+      <CarouselIndicators 
+      className='indicator'
+      items={items} 
+      activeIndex={activeIndex} 
+      onClickHandler={goToIndex} />
       {slides}
       <CarouselControl direction="prev" directionText="Previous" onClickHandler={previous} />
       <CarouselControl direction="next" directionText="Next" onClickHandler={next} />

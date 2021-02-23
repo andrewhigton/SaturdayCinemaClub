@@ -1,10 +1,7 @@
-import React, { Fragment, useEffect } from 'react';
-import { Link, Redirect } from 'react-router-dom';
-import { connect, useDispatch } from 'react-redux';
+import React, { useEffect } from 'react';
+import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import Spinner from '../layout/Spinner';
 import Films from '../films/Films';
-import Film from '../films/Films';
 import Footer from '../footer/Footer';
 import { loadFilms } from '../../actions/film';
 import FilmCarousel from '../carousel/Carousel';
@@ -18,10 +15,6 @@ const Landing = ({
     	loadFilms();	
 	  	}, [loadFilms]);
 	 
-	// if (isAuthenticated) {
- //    return <Redirect to='/film/dashboard'/>;
- //  	}
-  	//console.log(films)
 	return (
 		<section>
 	      <div className="carousel">
@@ -47,16 +40,3 @@ const mapStateToProps = state => ({
 });
 
 export default connect(mapStateToProps, { loadFilms })(Landing);
-
-
-// return (
-// 		<section className="landing dark-overlay">
-// 	      <div className="carousel">
-// 		    <filmCarousel/>	          
-// 	       </div>
-// 	       <div>
-// 			<Films/>	       	
-// 	       </div>
-
-// 	    </section>
-// 		)
