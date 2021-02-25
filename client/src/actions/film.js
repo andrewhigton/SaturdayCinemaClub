@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { setAlert } from './alert';
+// import { setAlert } from './alert';
 import {
   GET_FILM,
   UPDATE_FILM,
@@ -64,7 +64,7 @@ export const createFilm = ( formData, history ) => async dispatch => {
     const errors = err.response.data.errors;
 
     if (errors) {
-      errors.forEach(error => dispatch(setAlert(error.msg, 'danger')));
+      alert(errors.forEach(error => dispatch(alert(error.msg, 'danger'))));
     }
 
     dispatch({
@@ -88,13 +88,12 @@ export const updateFilm = (formData, history) => async dispatch => {
       type: UPDATE_FILM,
       payload: res.data
       });
-    dispatch(setAlert('Thanks for your booking', 'success'));
-    //history.push(getFilmById(`/api/film/booking/${film_id}`));
+    alert('Thanks for your booking', 'success');
   } catch (err) {
     const errors = err.response.data.errors;
 
     if (errors) {
-      errors.forEach(error => dispatch(setAlert(error.msg, 'danger')));
+      alert(errors.forEach(error => dispatch(alert(error.msg, 'danger'))));
     }
 
     dispatch({
@@ -113,7 +112,7 @@ export const deleteFilm = id => async dispatch => {
       payload: res.data
     });
 
-    dispatch(setAlert('Tickets Removed', 'success'));
+    alert('Tickets Removed', 'success');
   } catch (err) {
     dispatch({
       type: FILM_ERROR,

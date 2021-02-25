@@ -264,8 +264,9 @@ body h1 {
   }
 
  .navbar {
-    max-height: 50px;
     width: 90%;
+    margin-top: 10px !important;
+    margin-bottom: 22px;
   }
   
   .main-title { 
@@ -293,7 +294,7 @@ body h1 {
   }
 
   .dropdown {
-    margin-top: 7px;
+    margin-top: 17px;
     font-size: 0.6em;
   }
 
@@ -413,6 +414,11 @@ body .inset-text {
 
  .navbar {
     height: 2vh;
+    margin-bottom: 12px;
+  }
+
+  .dropdown {
+    margin-top: 10px;
   }
 
   .logout-dropdown {

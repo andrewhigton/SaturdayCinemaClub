@@ -18,6 +18,11 @@ const Login = ( { login, isAuthenticated } ) => {
 
 	const onSubmit = async e => {  
 		e.preventDefault(); 
+		
+		if(email === '' || password === '') {
+			alert('Please fill in your email and password');
+			return;
+		}
 		//console.log('Success');
 		login(email, password)
 		//this fires login/actions

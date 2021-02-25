@@ -13,9 +13,7 @@ const DashboardTickets = ({ user, loading }) => {
         {user.tickets.length === 0 ? 
           (
          <Fragment >  
-      
-         <h2 className='tickets-films-head'>Your tickets</h2>
-              <p>You haven't bought any tickets yet</p>
+              <p className='films-link'>You haven't bought any tickets yet</p>
           <Link  to="/">
             <p className="films-link">Search films</p> 
           </Link>

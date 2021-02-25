@@ -1,14 +1,13 @@
 import axios from 'axios';
-import { setAlert } from './alert';
 import {
   REGISTER_SUCCESS,
   REGISTER_FAIL,
   USER_LOADED,
-  USER_ERROR,
   UPDATE_USER,
   LOGIN_SUCCESS,
   LOGIN_FAIL,
   LOGOUT,
+  AUTH_ERROR
 } from './types';
 
 import setAuthToken from '../utils/setAuthToken';
@@ -26,8 +25,9 @@ export const loadUser = () => async dispatch => {
       payload: res.data
     });
   } catch (err) {
+    console.log(err)
     dispatch({
-      type: USER_ERROR
+      type: AUTH_ERROR
     });
   }
 };
@@ -53,7 +53,8 @@ export const register = ({ name, email, password }) => async dispatch => {
     const errors = err.response.data.errors;
 
     if (errors) {
-      errors.forEach(error => dispatch(setAlert(error.msg, 'danger')));
+      console.log(err)
+      alert(err)
     }
 
     dispatch({
@@ -83,15 +84,14 @@ export const login = (email, password) => async dispatch => {
     
   } 
   catch (err) {
-    console.log(err)
+    
     const errors = err.response.data.errors;
     if (errors) {
-      errors.forEach(error => dispatch(setAlert(error.msg, 'danger')));
-    }
-
-    dispatch({
+      alert(errors)
+      dispatch({
       type: LOGIN_FAIL
     });
+    }
   }
 
 };
@@ -114,12 +114,9 @@ export const updateUserTickets = (formData, history) => async dispatch => {
   } catch (err) {
     const errors = err.response.data.errors;
     if (errors) {
-      errors.forEach(error => dispatch(setAlert(error.msg, 'danger')));
+      alert(errors)
+      console.log(errors)
     }
-    dispatch({
-      type: USER_ERROR,
-      payload: { msg: err.response.statusText, status: err.response.status }
-    });
   }
 };
 
@@ -131,13 +128,10 @@ export const deleteTickets = id => async dispatch => {
       type: UPDATE_USER,
       payload: res.data
     });
-
-    dispatch(setAlert('Tickets Removed', 'success'));
   } catch (err) {
-    dispatch({
-      type: USER_ERROR,
-      payload: { msg: err.response.statusText, status: err.response.status }
-    });
+    alert(err.response.statusText)
+    console.log(err.response.statusText)
+    
   }
 };
 
