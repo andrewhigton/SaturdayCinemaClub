@@ -16,8 +16,8 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 connectDB();
 
-app.get('/', (req, res) => { res.send("its working") });
-console.log('change');
+// app.get('/', (req, res) => { res.send("its working") });
+// console.log('change');
 
 app.use(express.json({ extended: false }));
 app.use(morgan('combined'));

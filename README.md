@@ -1,13 +1,3 @@
-to do
-
-write readme
-
-how to start
-
-howitworks details
-
-
-
 to start, 
 
 NPM RUN DEV
@@ -42,3 +32,5 @@ CMD ["/bin/bash"]
 
 
 
+// app.get('/', (req, res) => { res.send("its working") });
+// console.log('change');
