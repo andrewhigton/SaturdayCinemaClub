@@ -1,7 +1,7 @@
 import React from 'react';
 import Footer from '../footer/Footer';
-import '../../App.scss';
-import './howitworks.scss';
+import '../../App.css';
+import './howitworks.css';
 
 const HowItWorks = () => {
 

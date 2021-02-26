@@ -3,7 +3,7 @@ import { Link, withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import Film from './Film';
-import './Films.scss';
+import './Films.css';
 
 const Films = ({ 
 	film: {films, loading} 

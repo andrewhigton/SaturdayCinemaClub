@@ -1,6 +1,6 @@
 import React from 'react';
-import './Tickets.scss';
-import '../../App.scss'
+import './Tickets.css';
+import '../../App.css'
 
 const Ticket = ({ ticket }) => {
 const { title, 

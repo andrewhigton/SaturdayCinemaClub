@@ -1,7 +1,7 @@
 import React, { Fragment } from 'react';
 import Spinner from '../layout/Spinner';
 import Film from '../films/Film';
-import '../../App.scss';
+import '../../App.css';
 import './Dashboard.css';
 
 const DashboardFilms = ({ films, user, loading }) => {

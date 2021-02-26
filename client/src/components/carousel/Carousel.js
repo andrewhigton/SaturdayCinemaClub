@@ -6,7 +6,7 @@ import {
   CarouselIndicators,
   CarouselCaption
 } from 'reactstrap';
-import './carousel.scss';
+import './carousel.css';
 
 const items = [
   {

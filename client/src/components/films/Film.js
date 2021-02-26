@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import './Films.scss';
+import './Films.css';
 const moment = require('moment');
 
 const Film = ({ film, index }) => {

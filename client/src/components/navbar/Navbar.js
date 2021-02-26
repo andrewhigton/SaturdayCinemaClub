@@ -3,8 +3,8 @@ import { Link, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { logout } from '../../actions/auth';
-import './Navbar.scss';
-import '../../App.scss';
+import './Navbar.css';
+import '../../App.css';
 
 const Navbar = ({ auth: { isAuthenticated, loading }, logout, params }) => {
 	

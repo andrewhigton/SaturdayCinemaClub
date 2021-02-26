@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import Footer from '../footer/Footer';
 import { loadFilms } from '../../actions/film';
 import Film from '../films/Film';
-import '../films/Films.scss';
+import '../films/Films.css';
 
 const FilmPage = ({ 
 	loadFilms,

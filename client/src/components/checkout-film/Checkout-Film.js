@@ -4,7 +4,7 @@ import { Link, withRouter } from 'react-router-dom';
 import StripeCheckoutButton from '../../components/stripe-button/stripe-button';
 import PropTypes from 'prop-types';
 import { updateUserTickets } from '../../actions/auth';
-import './checkoutfilm.scss'
+import './checkoutfilm.css'
 
 const CheckoutFilm = ({ 
   film: {film, loading}, 

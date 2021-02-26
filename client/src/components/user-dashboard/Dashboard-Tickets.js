@@ -2,7 +2,7 @@ import React, { Fragment } from 'react';
 import { Link } from 'react-router-dom';
 import Spinner from '../layout/Spinner';
 import Ticket from '../ticket/Ticket';
-import '../../App.scss';
+import '../../App.css';
 import './Dashboard.css'; 
 
 const DashboardTickets = ({ user, loading }) => {
